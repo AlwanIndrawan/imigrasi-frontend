@@ -16,7 +16,7 @@ margin:0;
 font-family:'Inter', sans-serif;
 color:white;
 height:100vh;
-overflow:hidden; /* ⬅️ halaman tidak bisa scroll */
+overflow:hidden;
 
 background:
 linear-gradient(rgba(7,31,79,0.85), rgba(11,61,145,0.9)),
@@ -34,21 +34,16 @@ position:fixed;
 top:0;
 left:0;
 width:100%;
-
 padding:15px 0;
-
 text-align:center;
 font-family:'Poppins', sans-serif;
 font-size:20px;
 font-weight:600;
 letter-spacing:1px;
-
 background:rgba(0,0,0,0.3);
 backdrop-filter:blur(10px);
-
 border-bottom:1px solid rgba(255,255,255,0.2);
 box-shadow:0 5px 20px rgba(0,0,0,0.4);
-
 z-index:10;
 }
 
@@ -62,12 +57,11 @@ height:100%;
 padding:40px 30px;
 gap:30px;
 box-sizing:border-box;
-
 margin-top:70px;
 }
 
 /* =========================
-   LEFT (VIDEO)
+   LEFT
 ========================= */
 #left{
 flex:2;
@@ -87,73 +81,54 @@ box-shadow:0 20px 60px rgba(0,0,0,0.7);
 #mainVideo{
 width:100%;
 height:100%;
-object-fit:cover;
+border:none;
 }
 
 /* overlay */
 #videoOverlay{
 position:absolute;
-top:0; /* ⬅️ pindah ke atas */
+top:0;
 left:0;
 width:100%;
 padding:20px;
-
-/* gradient dari atas */
 background:linear-gradient(to bottom, rgba(0,0,0,0.7), transparent);
 }
 
-
-/* title */
 #videoTitle{
 font-family:'Poppins', sans-serif;
 font-size:20px;
 font-weight:600;
-
-/* tambahan */
 text-shadow:0 2px 10px rgba(0,0,0,0.8);
 }
 
-
 /* =========================
-   RIGHT (GLASS + SCROLL)
+   RIGHT
 ========================= */
 #right{
 flex:1;
-
 padding:20px;
 display:flex;
 flex-direction:column;
 gap:20px;
-
-/* hanya sidebar scroll */
 overflow-y:auto;
 max-height:85%;
-
-/* glass effect */
 background:rgba(255,255,255,0.08);
 backdrop-filter:blur(15px);
-
 border-radius:20px;
 border:1px solid rgba(255,255,255,0.15);
-
-/* posisi tengah */
-margin-top:auto;
-margin-bottom:auto;
+margin:auto 0;
 }
 
-/* scroll style */
+/* scroll */
 #right::-webkit-scrollbar{
 width:6px;
 }
-
 #right::-webkit-scrollbar-thumb{
 background:rgba(255,255,255,0.3);
 border-radius:10px;
 }
 
-/* =========================
-   CARD
-========================= */
+/* card */
 .card{
 display:flex;
 gap:15px;
@@ -177,15 +152,8 @@ background:rgba(255,255,255,0.25);
 .thumb{
 width:100px;
 height:70px;
-background:#ccc;
 border-radius:8px;
-overflow:hidden;
-}
-
-.thumb video{
-width:100%;
-height:100%;
-object-fit:cover;
+background:linear-gradient(135deg,#1e3a8a,#3b82f6);
 }
 
 /* text */
@@ -201,34 +169,13 @@ font-weight:500;
 position:fixed;
 top:80px;
 left:20px;
-
-display:flex;
-align-items:center;
-gap:10px;
-
 padding:10px 16px;
 border-radius:30px;
-
 background:rgba(255,255,255,0.15);
 backdrop-filter:blur(10px);
-
-font-family:'Poppins', sans-serif;
-font-weight:500;
-
 cursor:pointer;
-transition:0.3s;
 box-shadow:0 5px 20px rgba(0,0,0,0.4);
-
 z-index:11;
-}
-
-#back:hover{
-background:rgba(255,255,255,0.25);
-transform:translateY(-2px);
-}
-
-#back span{
-font-size:18px;
 }
 
 </style>
@@ -236,92 +183,72 @@ font-size:18px;
 
 <body>
 
-<!-- HEADER -->
-<div id="header">
-PUSAT INFORMASI
-</div>
+<div id="header">PUSAT INFORMASI</div>
 
-<!-- BACK BUTTON -->
 <div id="back" onclick="location.href='index.html'">
- Kembali
+Kembali
 </div>
 
 <div id="container">
 
 <!-- LEFT -->
 <div id="left">
-
 <div id="videoBox">
 
-<video id="mainVideo" controls autoplay muted>
-  <source src="Gambaran Umum.mp4" type="video/mp4">
-</video>
+<iframe 
+id="mainVideo"
+src="https://drive.google.com/file/d/1y41jwNfuHjDsNRz0q1yWTRNk1mfQBwV6/preview"
+allow="autoplay">
+</iframe>
 
 <div id="videoOverlay">
-  <div id="videoTitle">Selamat Datang</div>
+<div id="videoTitle">Selamat Datang</div>
 </div>
 
 </div>
-
 </div>
 
 <!-- RIGHT -->
 <div id="right">
 
-<div class="card active" onclick="playVideo(this,'Gambaran Umum.mp4','Selamat Datang')">
-  <div class="thumb">
-    <video src="Gambaran Umum.mp4"></video>
-  </div>
-  <p>Selamat Datang</p>
+<div class="card active" onclick="playVideo(this,'1y41jwNfuHjDsNRz0q1yWTRNk1mfQBwV6','Selamat Datang')">
+<div class="thumb"></div>
+<p>Selamat Datang</p>
 </div>
 
-<div class="card" onclick="playVideo(this,'Bagian 2.mp4','Bagian Tata Usaha dan Umum')">
-  <div class="thumb">
-    <video src="Bagian 2.mp4"></video>
-  </div>
-  <p>Bagian Tata Usaha dan Umum</p>
+<div class="card" onclick="playVideo(this,'1ITORdE8kr1piramfByikyB5inMjir0lq','Bagian Tata Usaha dan Umum')">
+<div class="thumb"></div>
+<p>Bagian Tata Usaha dan Umum</p>
 </div>
 
-<div class="card" onclick="playVideo(this,'Bagian 3.mp4','Bidang Dokumen Perjalanan, Izin Tinggal, dan Status Keimigrasian')">
-  <div class="thumb">
-    <video src="Bagian 3.mp4"></video>
-  </div>
-  <p>Bidang Dokumen Perjalanan, Izin Tinggal, dan Status Keimigrasian</p>
+<div class="card" onclick="playVideo(this,'1ITORdE8kr1piramfByikyB5inMjir0lq','Bidang Dokumen Perjalanan')">
+<div class="thumb"></div>
+<p>Bidang Dokumen Perjalanan</p>
 </div>
 
-<div class="card" onclick="playVideo(this,'Bagian 4.mp4','Pengawasan dan Penindakan Keimigrasian')">
-  <div class="thumb">
-    <video src="Bagian 4.mp4"></video>
-  </div>
-  <p>Pengawasan dan Penindakan Keimigrasian</p>
+<div class="card" onclick="playVideo(this,'1VK7wOXfPUGNyuR_9qkxWYH_gxLrK4t0E','Bidang Pengawasan')">
+<div class="thumb"></div>
+<p>Bidang Pengawasan</p>
 </div>
 
-<div class="card" onclick="playVideo(this,'Bagian 5.mp4','Bidang Intelijen dan Kepatuhan Internal')">
-  <div class="thumb">
-    <video src="Bagian 5.mp4"></video>
-  </div>
-  <p>Bidang Intelijen dan Kepatuhan Internal</p>
+<div class="card" onclick="playVideo(this,'1JBePB_y82C2rrbwp1dNkuDyx3hx79W8i','Bidang Intelijen')">
+<div class="thumb"></div>
+<p>Bidang Intelijen</p>
 </div>
 
-<div class="card" onclick="playVideo(this,'Biaya Pembuatan paspor.mp4','Biaya Pembuatan paspor')">
-  <div class="thumb">
-    <video src="Biaya Pembuatan paspor.mp4"></video>
-  </div>
-  <p>Biaya Pembuatan paspor</p>
+<div class="card" onclick="playVideo(this,'1HUQf_gb-Fw-KRkI-lAQ_BeNysTdIZdG6','Biaya Paspor')">
+<div class="thumb"></div>
+<p>Biaya Paspor</p>
 </div>
 
-<div class="card" onclick="playVideo(this,'Tarif Layanan.mp4','Tarif Layanan')">
-  <div class="thumb">
-    <video src="Tarif Layanan.mp4"></video>
-  </div>
-  <p>Tarif Layanan Izin Tinggal</p>
+<div class="card" onclick="playVideo(this,'1DzA2kHeDqTUImdiEoNOPR-Qj50kLRmd5','Tarif Layanan')">
+<div class="thumb"></div>
+<p>Tarif Layanan</p>
 </div>
 
-<div class="card" onclick="playVideo(this,'Dokumen Persyaratan Permohonan Paspor.mp4','Dokumen Persyaratan Permohonan Paspor')">
-  <div class="thumb">
-    <video src="Dokumen Persyaratan Permohonan Paspor.mp4"></video>
-  </div>
-  <p>Dokumen Persyaratan Permohonan Paspor</p>
+<div class="card" onclick="playVideo(this,'1XYAMpuEM76Ypp8WQqDeVZoI71NIsIoxO','Dokumen Persyaratan')">
+<div class="thumb"></div>
+<p>Dokumen Persyaratan</p>
 </div>
 
 </div>
@@ -330,31 +257,20 @@ PUSAT INFORMASI
 
 <script>
 
-/* autoplay safety */
-window.onload = function(){
-  let video = document.getElementById("mainVideo");
-  video.muted = true;
-  video.play().catch(()=>{});
-};
+function playVideo(el, id, title){
 
-/* play video */
-function playVideo(el, src, title){
+let video = document.getElementById("mainVideo");
+let titleBox = document.getElementById("videoTitle");
 
-  let video = document.getElementById("mainVideo");
-  let titleBox = document.getElementById("videoTitle");
+video.src = `https://drive.google.com/file/d/${id}/preview`;
 
-  video.pause();
-  video.src = src;
-  video.load();
-  video.play();
+titleBox.innerText = title;
 
-  titleBox.innerText = title;
+document.querySelectorAll(".card").forEach(card=>{
+card.classList.remove("active");
+});
 
-  document.querySelectorAll(".card").forEach(card=>{
-    card.classList.remove("active");
-  });
-
-  el.classList.add("active");
+el.classList.add("active");
 
 }
 
