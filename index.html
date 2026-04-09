@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Imigrasi Sulawesi Selatan</title>
+
+<!-- FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+   GLOBAL
+========================= */
+body{
+margin:0;
+font-family:'Inter', sans-serif;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+
+background:
+linear-gradient(rgba(7,31,79,0.85), rgba(11,61,145,0.9)),
+url('bg.jpeg');
+
+background-size:cover;
+background-position:center;
+overflow:hidden;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+#main{
+max-width:900px;
+padding:20px;
+animation:fadeIn 1.2s ease;
+}
+
+/* =========================
+   TITLE
+========================= */
+h1{
+font-family:'Poppins', sans-serif;
+font-size:48px;
+font-weight:700;
+line-height:1.4;
+letter-spacing:1px;
+margin-bottom:20px;
+}
+
+/* cursor */
+#typing::after{
+content:"|";
+margin-left:5px;
+animation:blink 1s infinite;
+}
+
+/* =========================
+   SUBTITLE
+========================= */
+p{
+font-size:18px;
+font-weight:300;
+opacity:0.9;
+margin-bottom:40px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.button-group{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:15px 28px;
+font-size:15px;
+border:none;
+border-radius:14px;
+cursor:pointer;
+transition:0.3s;
+font-family:'Poppins', sans-serif;
+font-weight:600;
+}
+
+/* primary */
+.btn-primary{
+background:#0B3D91;
+color:white;
+box-shadow:0 5px 20px rgba(0,0,0,0.4);
+}
+
+/* secondary */
+.btn-secondary{
+background:white;
+color:#0B3D91;
+}
+
+/* hover */
+.btn:hover{
+transform:translateY(-4px) scale(1.02);
+box-shadow:0 10px 30px rgba(0,0,0,0.6);
+}
+
+/* glow */
+.btn-primary:hover{
+box-shadow:0 0 20px rgba(59,130,246,0.8);
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+@keyframes blink{
+50%{ opacity:0 }
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer{
+position:absolute;
+bottom:15px;
+font-size:12px;
+opacity:0.7;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="main">
+
+<h1 id="typing"></h1>
+
+<p>
+SULAWESI SELATAN
+</p>
+
+<div class="button-group">
+
+<button class="btn btn-primary"
+onclick="location.href='chatbot.html'">
+Asisten Virtual
+</button>
+
+<button class="btn btn-secondary"
+onclick="location.href='disabilitas.html'">
+Mode Disabilitas
+</button>
+
+</div>
+
+</div>
+
+<footer>
+© Imigrasi Sulawesi Selatan
+</footer>
+
+<script>
+
+/* =========================
+   TYPING EFFECT (JS)
+========================= */
+
+const text = "KANTOR WILAYAH DIREKTORAT JENDERAL IMIGRASI";
+let i = 0;
+
+function typeEffect(){
+  if(i < text.length){
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeEffect, 35); // kecepatan ketik
+  }
+}
+
+typeEffect();
+
+</script>
+
+</body>
+</html>
