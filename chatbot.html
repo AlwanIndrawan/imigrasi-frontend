@@ -17,33 +17,41 @@ background-size:cover;
 background-position:center;
 background-attachment:fixed;
 color:white;
-height:100vh;
-overflow:hidden;
+
 display:flex;
 flex-direction:column;
+align-items:center;
+
+min-height:100vh;
 }
 
 /* =========================
    HEADER
 ========================= */
 header{
+width:100%;
+max-width:1200px;
 text-align:center;
 padding:20px;
 font-size:24px;
 font-weight:bold;
 background:rgba(0,0,0,0.3);
 backdrop-filter: blur(5px);
+border-radius:0 0 20px 20px;
 }
 
 /* =========================
    LAYOUT
 ========================= */
 #container{
+width:100%;
+max-width:1200px;
 flex:1;
 display:flex;
 justify-content:center;
 align-items:center;
 padding:20px;
+box-sizing:border-box;
 }
 
 #chatArea{
@@ -57,15 +65,35 @@ align-items:center;
    CHAT BOX
 ========================= */
 #chatBox{
+position:relative;
 width:100%;
 max-width:800px;
-height:85vh;
+
+/* RESPONSIVE HEIGHT */
+height:clamp(500px, 80vh, 900px);
+
 display:flex;
 flex-direction:column;
 background:rgba(255,255,255,0.15);
 backdrop-filter:blur(15px);
 border-radius:20px;
 overflow:hidden;
+}
+
+/* =========================
+   AI CHARACTER
+========================= */
+#aiCharacter{
+position:absolute;
+bottom:80px;
+right:15px;
+z-index:5;
+pointer-events:none;
+}
+
+#aiImg{
+width:clamp(80px, 10vw, 130px);
+transition:0.2s;
 }
 
 /* =========================
@@ -90,25 +118,21 @@ flex-direction:column;
 }
 
 /* =========================
-   CHAT BUBBLE (FIXED)
+   CHAT BUBBLE
 ========================= */
 .message{
 display:inline-block;
 max-width:70%;
 padding:14px 18px;
 margin-bottom:12px;
-
 border-radius:18px;
 font-size:15px;
 line-height:1.4;
-
 animation: fadeIn 0.3s ease;
-
 word-wrap:break-word;
 white-space:pre-wrap;
 }
 
-/* USER */
 .user{
 background:#131e7e;
 color:white;
@@ -118,7 +142,6 @@ width:fit-content;
 border-bottom-right-radius:5px;
 }
 
-/* BOT */
 .bot{
 background:#f1f5f9;
 color:black;
@@ -172,9 +195,7 @@ button:hover{
 opacity:0.85;
 }
 
-/* =========================
-   MIC ACTIVE
-========================= */
+/* MIC */
 #micBtn.active{
 background:#1e3a8a;
 animation:pulse 1s infinite;
@@ -186,46 +207,48 @@ animation:pulse 1s infinite;
 100%{ transform:scale(1); }
 }
 
-/* STATUS TEXT */
 #micStatus{
 margin-left:10px;
 font-size:13px;
 }
 
-/* =========================
-   BACK BUTTON
-========================= */
+/* BACK BUTTON */
 #back{
 position:fixed;
 top:80px;
 left:20px;
-
-display:flex;
-align-items:center;
-gap:10px;
-
 padding:10px 16px;
 border-radius:30px;
-
 background:rgba(255,255,255,0.15);
 backdrop-filter:blur(10px);
-
-font-weight:500;
-
 cursor:pointer;
-transition:0.3s;
-box-shadow:0 5px 20px rgba(0,0,0,0.4);
-
 z-index:11;
 }
 
-#back:hover{
-background:rgba(255,255,255,0.25);
-transform:translateY(-2px);
+/* =========================
+   LARGE SCREEN FIX
+========================= */
+@media (min-width:1600px){
+#chatBox{
+max-width:900px;
+}
 }
 
-#back span{
-font-size:18px;
+/* =========================
+   MOBILE
+========================= */
+@media (max-width:600px){
+
+#chatBox{
+height:90vh;
+border-radius:0;
+}
+
+#aiCharacter{
+right:10px;
+bottom:70px;
+}
+
 }
 
 </style>
@@ -237,64 +260,83 @@ font-size:18px;
 ASISTEN VIRTUAL IMIGRASI SULAWESI SELATAN
 </header>
 
-<!-- BACK BUTTON -->
 <div id="back" onclick="location.href='index.html'">
 Kembali
 </div>
 
 <div id="container">
-
 <div id="chatArea">
-  <div id="chatBox">
+<div id="chatBox">
 
-    <div id="chatHeader">
-      Asisten Virtual Siap Membantu
-    </div>
-
-    <div id="chat"></div>
-
-    <div id="inputArea">
-      <input id="userInput" placeholder="Tanyakan tentang keimigrasian...">
-
-      <button id="micBtn" onclick="startListening()">🎙️</button>
-
-      <button onclick="sendMessage()">Kirim</button>
-
-      <span id="micStatus"></span>
-    </div>
-
-  </div>
+<div id="chatHeader">
+Asisten Virtual Siap Membantu
 </div>
 
+<!-- AI CHARACTER -->
+<div id="aiCharacter">
+  <img id="aiImg" src="idle.png">
+</div>
+
+<div id="chat"></div>
+
+<div id="inputArea">
+<input id="userInput" placeholder="Tanyakan tentang keimigrasian...">
+<button id="micBtn" onclick="startListening()">🎙️</button>
+<button onclick="sendMessage()">Kirim</button>
+<span id="micStatus"></span>
+</div>
+
+</div>
+</div>
 </div>
 
 <script>
 
 /* =========================
-   SPEAK (TTS)
+   AI STATE
+========================= */
+function setAI(state){
+  let img = document.getElementById("aiImg");
+  if(state === "talk"){
+    img.src = "talk.png";
+  } else {
+    img.src = "idle.png";
+  }
+}
+
+/* =========================
+   SPEAK
 ========================= */
 async function speak(text){
 
-  try{
-    let res = await fetch("https://imigrasi-ai.onrender.com/tts-eleven",{
-      method:"POST",
-      headers:{ "Content-Type":"application/json" },
-      body:JSON.stringify({ text: text })
-    });
+setAI("talk");
 
-    if(!res.ok) throw new Error();
+try{
+  let res = await fetch("https://imigrasi-ai.onrender.com/tts-eleven",{
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body:JSON.stringify({ text: text })
+  });
 
-    let blob = await res.blob();
-    let audio = new Audio(URL.createObjectURL(blob));
-    await audio.play();
+  if(!res.ok) throw new Error();
 
-  }catch{
-    let suara = new SpeechSynthesisUtterance(text);
-    suara.lang = "id-ID";
-    suara.rate = 0.95;
-    speechSynthesis.cancel();
-    speechSynthesis.speak(suara);
-  }
+  let blob = await res.blob();
+  let audio = new Audio(URL.createObjectURL(blob));
+
+  await audio.play();
+
+  audio.onended = () => setAI("idle");
+
+}catch{
+
+  let suara = new SpeechSynthesisUtterance(text);
+  suara.lang = "id-ID";
+
+  suara.onend = () => setAI("idle");
+
+  speechSynthesis.cancel();
+  speechSynthesis.speak(suara);
+}
 
 }
 
@@ -302,7 +344,6 @@ async function speak(text){
    CHAT UI
 ========================= */
 function addMessage(text,type){
-
 let chat=document.getElementById("chat");
 
 let div=document.createElement("div");
@@ -310,36 +351,26 @@ div.className="message "+type;
 div.innerText=text;
 
 chat.appendChild(div);
-
-chat.scrollTo({
-  top: chat.scrollHeight,
-  behavior: "smooth"
-});
+chat.scrollTop = chat.scrollHeight;
 
 return div;
-
 }
 
 function sendMessage(){
-
 let input=document.getElementById("userInput");
 let message=input.value;
-
 if(message==="") return;
 
 addMessage(message,"user");
-
 input.value="";
-
 botReply(message);
-
 }
 
 document.getElementById("userInput").addEventListener("keydown", function(e) {
-  if (e.key === "Enter" && !e.shiftKey) {
-    e.preventDefault();
-    sendMessage();
-  }
+if (e.key === "Enter") {
+e.preventDefault();
+sendMessage();
+}
 });
 
 /* =========================
@@ -350,55 +381,49 @@ let isListening = false;
 
 function startListening(){
 
-  if (!('webkitSpeechRecognition' in window)) {
-    alert("Browser tidak mendukung voice input");
-    return;
-  }
+if (!('webkitSpeechRecognition' in window)) {
+alert("Browser tidak mendukung voice input");
+return;
+}
 
-  let micBtn = document.getElementById("micBtn");
-  let status = document.getElementById("micStatus");
+let micBtn = document.getElementById("micBtn");
+let status = document.getElementById("micStatus");
 
-  if(isListening){
-    recognition.stop();
-    return;
-  }
+if(isListening){
+recognition.stop();
+return;
+}
 
-  recognition = new webkitSpeechRecognition();
-  recognition.lang = "id-ID";
-  recognition.continuous = false;
-  recognition.interimResults = false;
+recognition = new webkitSpeechRecognition();
+recognition.lang = "id-ID";
 
-  isListening = true;
+isListening = true;
+micBtn.classList.add("active");
+status.innerText = "🎤 Mendengarkan...";
 
-  micBtn.classList.add("active");
-  status.innerText = "🎤 Mendengarkan...";
+recognition.start();
 
-  recognition.start();
+recognition.onresult = function(event){
+let hasil = event.results[0][0].transcript;
+document.getElementById("userInput").value = hasil;
+sendMessage();
+};
 
-  recognition.onresult = function(event){
-    let hasil = event.results[0][0].transcript;
-    document.getElementById("userInput").value = hasil;
-    sendMessage();
-  };
-
-  recognition.onerror = function(event){
-    console.log("Error mic:", event.error);
-  };
-
-  recognition.onend = function(){
-    isListening = false;
-    micBtn.classList.remove("active");
-    status.innerText = "";
-  };
+recognition.onend = function(){
+isListening = false;
+micBtn.classList.remove("active");
+status.innerText = "";
+};
 
 }
 
 /* =========================
-   API CHAT
+   BOT RESPONSE
 ========================= */
 async function botReply(text){
 
 let bubble=addMessage("...", "bot");
+setAI("talk");
 
 try{
 
@@ -412,11 +437,12 @@ let data=await response.json();
 
 bubble.innerText=data.reply;
 
-speak(data.reply);
+await speak(data.reply);
 
 }catch{
 
 bubble.innerText="Terjadi kesalahan koneksi.";
+setAI("idle");
 
 }
 

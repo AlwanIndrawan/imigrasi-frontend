@@ -8,73 +8,99 @@
 
 <style>
 
-/* GLOBAL */
+/* =========================
+   GLOBAL
+========================= */
 body{
 margin:0;
 font-family:'Inter', sans-serif;
 color:white;
-height:100vh;
-overflow:hidden;
 
 background:
 linear-gradient(rgba(7,31,79,0.9), rgba(11,61,145,0.95)),
 url('bg.jpeg');
 background-size:cover;
+background-position:center;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+
+min-height:100vh;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 #header{
-position:fixed;
-top:0;
 width:100%;
+max-width:1300px;
 padding:15px;
 text-align:center;
 font-family:'Poppins';
 font-weight:600;
 background:rgba(0,0,0,0.3);
 backdrop-filter:blur(12px);
-z-index:10;
+border-radius:0 0 20px 20px;
 }
 
-/* BACK BUTTON */
+/* =========================
+   BACK BUTTON (AMAN)
+========================= */
 #back{
 position:fixed;
-top:100px; /* FIX tidak nutup video */
-left:40px;
+top:90px;
+left:20px;
+
 padding:10px 18px;
 border-radius:30px;
+
 background:rgba(255,255,255,0.15);
+backdrop-filter:blur(10px);
+
 cursor:pointer;
-z-index:20;
+z-index:50;
+
 transition:0.3s;
 }
+
 #back:hover{
 background:rgba(255,255,255,0.3);
+transform:translateY(-2px);
 }
 
-/* CONTAINER */
+/* =========================
+   CONTAINER
+========================= */
 #container{
+width:100%;
+max-width:1300px;
+
 display:flex;
-height:calc(100vh - 80px); /* FULL tanpa kosong */
-padding:90px 30px 20px;
 gap:25px;
+
+padding:20px;
+box-sizing:border-box;
+
+flex:1;
 }
 
-/* LEFT */
+/* =========================
+   LEFT (VIDEO)
+========================= */
 #left{
-flex:1.7;
+flex:1.6;
 display:flex;
-align-items:flex-start;
-height:100%;
 }
 
 #videoBox{
 width:100%;
-height:100%;
-max-height:calc(100vh - 140px);
+height:clamp(400px, 65vh, 750px);
+
 border-radius:24px;
 overflow:hidden;
 position:relative;
+
 box-shadow:0 20px 60px rgba(0,0,0,0.7);
 }
 
@@ -98,16 +124,18 @@ font-family:'Poppins';
 font-size:18px;
 }
 
-/* RIGHT */
+/* =========================
+   RIGHT (LIST)
+========================= */
 #right{
-flex:1.2;
+flex:1.1;
 padding:20px;
+
 display:flex;
 flex-direction:column;
 gap:12px;
 
-height:100%;
-max-height:calc(100vh - 140px);
+height:clamp(400px, 65vh, 750px);
 overflow-y:auto;
 
 background:rgba(255,255,255,0.08);
@@ -123,7 +151,9 @@ align-items:center;
 cursor:pointer;
 padding:12px;
 border-radius:14px;
+
 transition:0.3s;
+
 background:rgba(255,255,255,0.05);
 border:1px solid rgba(255,255,255,0.08);
 }
@@ -146,6 +176,7 @@ border-radius:10px;
 background-size:cover;
 background-position:center;
 position:relative;
+flex-shrink:0;
 }
 
 .thumb::after{
@@ -184,12 +215,77 @@ background:rgba(255,255,255,0.3);
 border-radius:10px;
 }
 
+/* =========================
+   LARGE SCREEN FIX
+========================= */
+@media (min-width:1600px){
+#container{
+max-width:1400px;
+}
+}
+
+/* =========================
+   TABLET
+========================= */
+@media (max-width:900px){
+
+#container{
+flex-direction:column;
+}
+
+#videoBox{
+height:300px;
+}
+
+#right{
+height:300px;
+}
+
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width:600px){
+
+#container{
+padding:10px;
+gap:15px;
+}
+
+#videoBox{
+height:220px;
+border-radius:15px;
+}
+
+#right{
+height:250px;
+padding:10px;
+}
+
+.thumb{
+width:90px;
+height:60px;
+}
+
+#back{
+top:70px;
+left:10px;
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
 <div id="header">PUSAT INFORMASI</div>
+
+<!-- BACK BUTTON -->
+<div id="back" onclick="location.href='index.html'">
+Kembali
+</div>
 
 <div id="container">
 
@@ -211,7 +307,6 @@ border-radius:10px;
 
 </div>
 
-<!-- YOUTUBE API -->
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
@@ -230,20 +325,15 @@ const videos = [
 let player;
 let current = 0;
 
-// INIT PLAYER
 function onYouTubeIframeAPIReady(){
 player = new YT.Player('mainVideo', {
 height: '100%',
 width: '100%',
 videoId: videos[0].id,
-playerVars: {
-autoplay: 1,
-mute: 1
-}
+playerVars: { autoplay: 1, mute: 1 }
 });
 }
 
-// RENDER CARD
 const container = document.getElementById("right");
 
 videos.forEach((v,i)=>{
@@ -264,7 +354,6 @@ div.innerHTML = `
 container.appendChild(div);
 });
 
-// PLAY VIDEO
 function playVideo(index){
 
 current = index;
@@ -276,7 +365,6 @@ document.getElementById("videoTitle").innerText = videos[index].title;
 document.querySelectorAll(".card").forEach(c=>c.classList.remove("active"));
 container.children[index].classList.add("active");
 
-// auto scroll
 container.children[index].scrollIntoView({
 behavior:"smooth",
 block:"center"
