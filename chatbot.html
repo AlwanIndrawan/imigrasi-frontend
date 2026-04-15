@@ -7,7 +7,7 @@
 <style>
 
 /* =========================
-   GLOBAL
+   GLOBAL (LOCK SCROLL)
 ========================= */
 body{
 margin:0;
@@ -22,7 +22,9 @@ display:flex;
 flex-direction:column;
 align-items:center;
 
-min-height:100vh;
+/* 🔒 KUNCI HALAMAN */
+height:100vh;
+overflow:hidden;
 }
 
 /* =========================
@@ -52,6 +54,9 @@ justify-content:center;
 align-items:center;
 padding:20px;
 box-sizing:border-box;
+
+/* PENTING */
+overflow:hidden;
 }
 
 #chatArea{
@@ -68,8 +73,6 @@ align-items:center;
 position:relative;
 width:100%;
 max-width:800px;
-
-/* RESPONSIVE HEIGHT */
 height:clamp(500px, 80vh, 900px);
 
 display:flex;
@@ -107,14 +110,25 @@ border-bottom:1px solid rgba(255,255,255,0.2);
 }
 
 /* =========================
-   CHAT
+   CHAT (BISA SCROLL)
 ========================= */
 #chat{
 flex:1;
-overflow-y:auto;
+overflow-y:auto; /* ✅ SCROLL DI SINI */
 padding:20px;
 display:flex;
 flex-direction:column;
+
+scroll-behavior:smooth;
+}
+
+/* SCROLLBAR */
+#chat::-webkit-scrollbar{
+width:6px;
+}
+#chat::-webkit-scrollbar-thumb{
+background:rgba(255,255,255,0.3);
+border-radius:10px;
 }
 
 /* =========================
@@ -212,7 +226,9 @@ margin-left:10px;
 font-size:13px;
 }
 
-/* BACK BUTTON */
+/* =========================
+   BACK BUTTON
+========================= */
 #back{
 position:fixed;
 top:80px;
@@ -226,7 +242,7 @@ z-index:11;
 }
 
 /* =========================
-   LARGE SCREEN FIX
+   RESPONSIVE
 ========================= */
 @media (min-width:1600px){
 #chatBox{
@@ -234,9 +250,6 @@ max-width:900px;
 }
 }
 
-/* =========================
-   MOBILE
-========================= */
 @media (max-width:600px){
 
 #chatBox{
@@ -297,11 +310,7 @@ Asisten Virtual Siap Membantu
 ========================= */
 function setAI(state){
   let img = document.getElementById("aiImg");
-  if(state === "talk"){
-    img.src = "talk.png";
-  } else {
-    img.src = "idle.png";
-  }
+  img.src = state === "talk" ? "talk.png" : "idle.png";
 }
 
 /* =========================
@@ -324,14 +333,12 @@ try{
   let audio = new Audio(URL.createObjectURL(blob));
 
   await audio.play();
-
   audio.onended = () => setAI("idle");
 
 }catch{
 
   let suara = new SpeechSynthesisUtterance(text);
   suara.lang = "id-ID";
-
   suara.onend = () => setAI("idle");
 
   speechSynthesis.cancel();
@@ -341,7 +348,7 @@ try{
 }
 
 /* =========================
-   CHAT UI
+   CHAT
 ========================= */
 function addMessage(text,type){
 let chat=document.getElementById("chat");
@@ -351,6 +358,8 @@ div.className="message "+type;
 div.innerText=text;
 
 chat.appendChild(div);
+
+/* AUTO SCROLL */
 chat.scrollTop = chat.scrollHeight;
 
 return div;
@@ -418,7 +427,7 @@ status.innerText = "";
 }
 
 /* =========================
-   BOT RESPONSE
+   BOT
 ========================= */
 async function botReply(text){
 
