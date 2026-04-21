@@ -6,9 +6,7 @@
 
 <style>
 
-/* =========================
-   GLOBAL
-========================= */
+/* ========================= GLOBAL ========================= */
 body{
 margin:0;
 font-family:Arial;
@@ -25,9 +23,7 @@ height:100vh;
 overflow:hidden;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* ========================= HEADER ========================= */
 header{
 width:100%;
 max-width:1200px;
@@ -40,9 +36,7 @@ backdrop-filter: blur(5px);
 border-radius:0 0 20px 20px;
 }
 
-/* =========================
-   CONTAINER
-========================= */
+/* ========================= CONTAINER ========================= */
 #container{
 width:100%;
 max-width:1200px;
@@ -54,14 +48,11 @@ padding:20px;
 box-sizing:border-box;
 }
 
-/* =========================
-   CHAT BOX
-========================= */
+/* ========================= CHAT BOX ========================= */
 #chatBox{
 width:100%;
 max-width:800px;
 height:clamp(500px, 80vh, 900px);
-
 display:flex;
 flex-direction:column;
 background:rgba(255,255,255,0.15);
@@ -71,19 +62,7 @@ overflow:hidden;
 z-index:5;
 }
 
-/* =========================
-   CHAT HEADER
-========================= */
-#chatHeader{
-padding:15px;
-font-weight:bold;
-background:rgba(0,0,0,0.3);
-border-bottom:1px solid rgba(255,255,255,0.2);
-}
-
-/* =========================
-   CHAT
-========================= */
+/* ========================= CHAT ========================= */
 #chat{
 flex:1;
 overflow-y:auto;
@@ -92,17 +71,12 @@ display:flex;
 flex-direction:column;
 }
 
-/* =========================
-   CHAT BUBBLE
-========================= */
 .message{
-display:inline-block;
 max-width:70%;
 padding:14px 18px;
 margin-bottom:12px;
 border-radius:18px;
 font-size:15px;
-line-height:1.4;
 white-space:pre-wrap;
 }
 
@@ -110,7 +84,6 @@ white-space:pre-wrap;
 background:#131e7e;
 color:white;
 margin-left:auto;
-width:fit-content;
 border-bottom-right-radius:5px;
 }
 
@@ -118,16 +91,12 @@ border-bottom-right-radius:5px;
 background:#f1f5f9;
 color:black;
 margin-right:auto;
-width:fit-content;
 border-bottom-left-radius:5px;
 }
 
-/* =========================
-   INPUT
-========================= */
+/* ========================= INPUT ========================= */
 #inputArea{
 display:flex;
-align-items:center;
 padding:15px;
 background:rgba(255,255,255,0.2);
 }
@@ -150,9 +119,7 @@ color:white;
 cursor:pointer;
 }
 
-/* =========================
-   CHARACTER
-========================= */
+/* ========================= CHARACTER ========================= */
 #charLeft, #charRight{
 position:fixed;
 bottom:0;
@@ -180,9 +147,7 @@ animation: float 3s ease-in-out infinite;
 transform:scale(1.05);
 }
 
-/* =========================
-   BACK BUTTON
-========================= */
+/* ========================= BACK ========================= */
 #back{
 position:fixed;
 top:80px;
@@ -194,36 +159,15 @@ cursor:pointer;
 z-index:11;
 }
 
-/* =========================
-   MOBILE
-========================= */
-@media (max-width:768px){
-
-#charLeft{ left:-60px; }
-#charRight{ right:-60px; }
-
-#charLeft img,
-#charRight img{
-width:clamp(120px, 30vw, 180px);
-opacity:0.7;
-}
-
-}
-
 </style>
 </head>
 
 <body>
 
-<header>
-ASISTEN VIRTUAL IMIGRASI SULAWESI SELATAN
-</header>
+<header>ASISTEN VIRTUAL IMIGRASI SULAWESI SELATAN</header>
 
-<div id="back" onclick="location.href='index.html'">
-Kembali
-</div>
+<div id="back" onclick="location.href='index.html'">Kembali</div>
 
-<!-- KARAKTER -->
 <div id="charLeft">
   <img id="menChar" src="idle-men.png">
 </div>
@@ -233,12 +177,7 @@ Kembali
 </div>
 
 <div id="container">
-
 <div id="chatBox">
-
-<div id="chatHeader">
-Asisten Virtual Siap Membantu
-</div>
 
 <div id="chat"></div>
 
@@ -248,22 +187,17 @@ Asisten Virtual Siap Membantu
 </div>
 
 </div>
-
 </div>
 
 <script>
 
-/* =========================
-   UNLOCK AUDIO (WAJIB UNTUK TV)
-========================= */
+/* ========================= UNLOCK AUDIO ========================= */
 document.body.addEventListener("click", () => {
   let audio = new Audio();
   audio.play().catch(()=>{});
 }, { once:true });
 
-/* =========================
-   CHARACTER CONTROL
-========================= */
+/* ========================= CHARACTER ========================= */
 function setCharacter(state){
 let men = document.getElementById("menChar");
 let women = document.getElementById("womenChar");
@@ -271,21 +205,17 @@ let women = document.getElementById("womenChar");
 if(state === "talk"){
   men.src = "talk-men.png";
   women.src = "talk-women.png";
-
   men.classList.add("talking");
   women.classList.add("talking");
 }else{
   men.src = "idle-men.png";
   women.src = "idle-women.png";
-
   men.classList.remove("talking");
   women.classList.remove("talking");
 }
 }
 
-/* =========================
-   CHAT UI
-========================= */
+/* ========================= CHAT ========================= */
 function addMessage(text,type){
 let chat=document.getElementById("chat");
 
@@ -310,19 +240,41 @@ input.value="";
 botReply(message);
 }
 
-document.getElementById("userInput").addEventListener("keydown", function(e) {
+document.getElementById("userInput").addEventListener("keydown", e => {
 if (e.key === "Enter") {
 e.preventDefault();
 sendMessage();
 }
 });
 
-/* =========================
-   PLAY TTS ELEVENLABS
-========================= */
+/* ========================= BROWSER TTS (FALLBACK) ========================= */
+function playBrowserTTS(text){
+
+  if (!("speechSynthesis" in window)) return;
+
+  speechSynthesis.cancel();
+
+  let utter = new SpeechSynthesisUtterance(text);
+  utter.lang = "id-ID";
+
+  let voices = speechSynthesis.getVoices();
+  let indo = voices.find(v => v.lang === "id-ID");
+
+  if(indo) utter.voice = indo;
+
+  utter.onstart = () => setCharacter("talk");
+  utter.onend = () => setCharacter("idle");
+
+  speechSynthesis.speak(utter);
+}
+
+speechSynthesis.onvoiceschanged = () => {
+  speechSynthesis.getVoices();
+};
+
+/* ========================= ELEVEN + FALLBACK ========================= */
 async function playTTS(text){
   try{
-    setCharacter("talk");
 
     let response = await fetch("https://imigrasi-ai.onrender.com/tts-eleven", {
       method:"POST",
@@ -330,24 +282,27 @@ async function playTTS(text){
       body: JSON.stringify({ text })
     });
 
+    if(!response.ok) throw "error";
+
     let blob = await response.blob();
+
+    if(blob.size < 1000) throw "audio kosong";
+
     let audio = new Audio(URL.createObjectURL(blob));
 
-    audio.onended = () => {
-      setCharacter("idle");
-    };
+    setCharacter("talk");
 
-    audio.play();
+    audio.onended = () => setCharacter("idle");
+
+    await audio.play();
 
   }catch{
-    console.log("Gagal play audio");
-    setCharacter("idle");
+    console.log("⚠️ fallback ke browser TTS");
+    playBrowserTTS(text);
   }
 }
 
-/* =========================
-   BOT
-========================= */
+/* ========================= BOT ========================= */
 async function botReply(text){
 
 let bubble=addMessage("...", "bot");
@@ -364,11 +319,9 @@ let data=await response.json();
 
 bubble.innerText=data.reply;
 
-// 🔊 MAIN FEATURE
 playTTS(data.reply);
 
 }catch{
-
 bubble.innerText="Terjadi kesalahan koneksi.";
 }
 
