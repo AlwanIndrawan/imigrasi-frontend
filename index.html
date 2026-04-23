@@ -2,252 +2,568 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Imigrasi Sulawesi Selatan</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-
-/* =========================
-   GLOBAL
-========================= */
-body{
-margin:0;
-font-family:'Inter', sans-serif;
-min-height:100vh;
-
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-color:white;
-
-background:
-linear-gradient(rgba(7,31,79,0.85), rgba(11,61,145,0.9)),
-url('bg.jpeg');
-background-size:cover;
-background-position:center;
-
-overflow:hidden;
+/* ====================== VARIABLES ====================== */
+:root {
+  --navy:       #060f2e;
+  --blue:       #0b3d91;
+  --blue-mid:   #1248b3;
+  --gold:       #c9a84c;
+  --gold-light: #e8c97a;
+  --gold-pale:  rgba(201,168,76,0.15);
+  --teal:       #0ea5a0;
+  --white:      #f8f9ff;
+  --glass:      rgba(255,255,255,0.06);
+  --glass-hover:rgba(255,255,255,0.11);
+  --border:     rgba(255,255,255,0.10);
+  --border-gold:rgba(201,168,76,0.35);
 }
 
-/* =========================
-   CONTAINER
-========================= */
-#main{
-width:100%;
-max-width:900px;
-padding:20px;
+/* ====================== RESET ====================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-animation:fadeIn 1.2s ease;
+/* ====================== BODY ====================== */
+body {
+  font-family: 'Outfit', sans-serif;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  overflow: hidden;
+  position: relative;
+  background: var(--navy);
 }
 
-/* =========================
-   TITLE
-========================= */
-h1{
-font-family:'Poppins', sans-serif;
-font-size:clamp(26px, 5vw, 48px); /* RESPONSIVE */
-font-weight:700;
-line-height:1.4;
-letter-spacing:1px;
-margin-bottom:20px;
+/* ====================== BACKGROUND ====================== */
+.bg-photo {
+  position: fixed;
+  inset: 0;
+  background: url('bg.jpeg') center/cover no-repeat;
+  z-index: 0;
+}
+.bg-overlay {
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(160deg, rgba(4,10,32,0.93) 0%, rgba(7,31,79,0.85) 50%, rgba(5,45,70,0.90) 100%);
+  z-index: 1;
 }
 
-/* cursor */
-#typing::after{
-content:"|";
-margin-left:5px;
-animation:blink 1s infinite;
+/* Geometric decoration lines */
+.bg-lines {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+}
+.bg-lines::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -15%;
+  width: clamp(300px,55vw,780px);
+  height: clamp(300px,55vw,780px);
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.08);
+  box-shadow:
+    0 0 0 clamp(40px,5vw,80px) rgba(201,168,76,0.04),
+    0 0 0 clamp(80px,10vw,160px) rgba(201,168,76,0.025),
+    0 0 0 clamp(130px,16vw,240px) rgba(201,168,76,0.015);
+}
+.bg-lines::after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: -10%;
+  width: clamp(200px,40vw,560px);
+  height: clamp(200px,40vw,560px);
+  border-radius: 50%;
+  border: 1px solid rgba(14,165,160,0.06);
+  box-shadow:
+    0 0 0 clamp(30px,4vw,60px) rgba(14,165,160,0.03),
+    0 0 0 clamp(70px,9vw,130px) rgba(14,165,160,0.015);
 }
 
-/* =========================
-   SUBTITLE
-========================= */
-p{
-font-size:clamp(14px, 2vw, 18px); /* RESPONSIVE */
-font-weight:300;
-opacity:0.9;
-margin-bottom:40px;
+/* Diagonal rule top-left */
+.deco-rule {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+.deco-rule::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px;
+  height: 38%;
+  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  opacity: 0.25;
+  transform: translateX(clamp(30px,5vw,80px));
+}
+.deco-rule::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 2px;
+  height: 28%;
+  background: linear-gradient(to top, transparent, rgba(14,165,160,0.5), transparent);
+  opacity: 0.2;
+  transform: translateX(calc(-1 * clamp(30px,5vw,80px)));
 }
 
-/* =========================
-   BUTTONS
-========================= */
-.button-group{
-display:flex;
-justify-content:center;
-gap:20px;
-flex-wrap:wrap;
+/* ====================== MAIN CONTAINER ====================== */
+#main {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: clamp(320px, 80vw, 820px);
+  padding: clamp(24px, 5vw, 60px) clamp(20px, 4vw, 50px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: pageIn 1s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(36px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.btn{
-padding:clamp(12px, 2vw, 15px) clamp(20px, 3vw, 28px);
-font-size:clamp(13px, 2vw, 15px);
-border:none;
-border-radius:14px;
-cursor:pointer;
-transition:0.3s;
-font-family:'Poppins', sans-serif;
-font-weight:600;
+/* ====================== LOGO AREA ====================== */
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px,1.5vw,18px);
+  margin-bottom: clamp(20px,4vh,36px);
+  animation: fadeUp 0.8s 0.1s ease both;
+}
+.logo-img {
+  width:  clamp(48px,6vw,80px);
+  height: clamp(48px,6vw,80px);
+  object-fit: contain;
+  filter: drop-shadow(0 4px 14px rgba(201,168,76,0.35));
+}
+.logo-divider {
+  width: 1px;
+  height: clamp(36px,5vw,56px);
+  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  opacity: 0.45;
+}
+.logo-text-wrap { text-align: left; }
+.logo-kw {
+  font-size: clamp(9px,0.8vw,11px);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+.logo-kw2 {
+  font-size: clamp(11px,1vw,14px);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+  color: rgba(255,255,255,0.85);
+  margin-top: 2px;
 }
 
-/* primary */
-.btn-primary{
-background:#0B3D91;
-color:white;
-box-shadow:0 5px 20px rgba(0,0,0,0.4);
+/* ====================== GOLD LINE ORNAMENT ====================== */
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: clamp(16px,3vh,28px);
+  animation: fadeUp 0.8s 0.2s ease both;
+  width: 100%;
+  max-width: 320px;
+}
+.ornament-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold));
+  opacity: 0.4;
+}
+.ornament-line:last-child {
+  background: linear-gradient(to left, transparent, var(--gold));
+}
+.ornament-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.7;
+  box-shadow: 0 0 8px var(--gold);
 }
 
-/* secondary */
-.btn-secondary{
-background:white;
-color:#0B3D91;
+/* ====================== HEADING ====================== */
+.heading-eyebrow {
+  font-size: clamp(10px,0.9vw,13px);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  margin-bottom: clamp(8px,1.5vh,14px);
+  opacity: 0.8;
+  animation: fadeUp 0.8s 0.25s ease both;
 }
 
-/* hover */
-.btn:hover{
-transform:translateY(-4px) scale(1.02);
-box-shadow:0 10px 30px rgba(0,0,0,0.6);
+h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(26px, 5.5vw, 64px);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: clamp(10px,2vh,18px);
+  animation: fadeUp 0.8s 0.3s ease both;
+  background: linear-gradient(135deg, #fff 0%, #d4e4ff 50%, var(--gold-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.btn-primary:hover{
-box-shadow:0 0 20px rgba(59,130,246,0.8);
+/* Typing cursor */
+#cursor {
+  display: inline-block;
+  width: 3px;
+  background: var(--gold-light);
+  margin-left: 4px;
+  border-radius: 2px;
+  animation: cursorBlink 1s step-end infinite;
+  vertical-align: middle;
+  -webkit-text-fill-color: var(--gold-light);
+  height: 0.75em;
+}
+@keyframes cursorBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+.subtitle {
+  font-size: clamp(13px, 1.5vw, 18px);
+  font-weight: 400;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.06em;
+  margin-bottom: clamp(28px,5vh,50px);
+  line-height: 1.6;
+  animation: fadeUp 0.8s 0.4s ease both;
+}
+.subtitle strong {
+  color: rgba(255,255,255,0.88);
+  font-weight: 500;
 }
 
-/* =========================
-   ANIMATIONS
-========================= */
-@keyframes fadeIn{
-from{
-opacity:0;
-transform:translateY(30px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
+/* ====================== BUTTON GROUP ====================== */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: clamp(12px,2vw,20px);
+  flex-wrap: wrap;
+  width: 100%;
+  animation: fadeUp 0.8s 0.55s ease both;
 }
 
-@keyframes blink{
-50%{ opacity:0 }
+.btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: clamp(13px,1.8vh,17px) clamp(22px,3vw,36px);
+  font-size: clamp(13px,1.2vw,15px);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s ease;
+  overflow: hidden;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0);
+  transition: background 0.2s;
+}
+.btn:hover::after { background: rgba(255,255,255,0.06); }
+.btn:hover { transform: translateY(-4px) scale(1.02); }
+.btn:active { transform: translateY(-1px) scale(0.99); }
+
+/* Icon inside btn */
+.btn-icon {
+  width: clamp(18px,1.8vw,22px);
+  height: clamp(18px,1.8vw,22px);
+  flex-shrink: 0;
 }
 
-/* =========================
-   FOOTER
-========================= */
-footer{
-position:absolute;
-bottom:15px;
-font-size:12px;
-opacity:0.7;
+/* Primary: Asisten Virtual */
+.btn-primary {
+  background: linear-gradient(135deg, #1248b3 0%, #0b3d91 100%);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+}
+.btn-primary:hover {
+  box-shadow: 0 12px 36px rgba(11,61,145,0.7), 0 0 0 1px rgba(100,160,255,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
-/* =========================
-   LARGE SCREEN (TV)
-========================= */
-@media (min-width:1600px){
-
-#main{
-max-width:1000px;
+/* Secondary: Pusat Informasi */
+.btn-info {
+  background: var(--glass);
+  color: #fff;
+  border: 1px solid var(--border-gold);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+}
+.btn-info:hover {
+  box-shadow: 0 12px 36px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,168,76,0.5);
+  border-color: rgba(201,168,76,0.6);
 }
 
-h1{
-font-size:56px;
+/* Tertiary: Mode Disabilitas */
+.btn-access {
+  background: linear-gradient(135deg, rgba(14,165,160,0.25), rgba(14,165,160,0.12));
+  color: #fff;
+  border: 1px solid rgba(14,165,160,0.4);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+}
+.btn-access:hover {
+  box-shadow: 0 12px 36px rgba(14,165,160,0.3), 0 0 0 1px rgba(14,165,160,0.5);
+  border-color: rgba(14,165,160,0.65);
 }
 
+/* ====================== STATUS ROW ====================== */
+.status-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px,2.5vw,32px);
+  margin-top: clamp(28px,5vh,48px);
+  animation: fadeUp 0.8s 0.7s ease both;
+  flex-wrap: wrap;
 }
 
-/* =========================
-   TABLET
-========================= */
-@media (max-width:900px){
-
-#main{
-padding:15px;
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: clamp(10px,0.85vw,12px);
+  font-weight: 500;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.04em;
+}
+.status-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.status-dot.green  { background:#22c55e; box-shadow: 0 0 6px #22c55e; animation: dotPulse 2s ease-in-out infinite; }
+.status-dot.teal   { background: var(--teal); box-shadow: 0 0 6px var(--teal); animation: dotPulse 2s 0.4s ease-in-out infinite; }
+.status-dot.gold   { background: var(--gold); box-shadow: 0 0 6px var(--gold); animation: dotPulse 2s 0.8s ease-in-out infinite; }
+@keyframes dotPulse {
+  0%,100%{ opacity:1; transform:scale(1); }
+  50%    { opacity:0.55; transform:scale(0.75); }
 }
 
+.status-sep {
+  width: 1px; height: 14px;
+  background: rgba(255,255,255,0.12);
 }
 
-/* =========================
-   MOBILE
-========================= */
-@media (max-width:600px){
+/* ====================== FOOTER ====================== */
+footer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(8px,1.5vh,14px) clamp(20px,4vw,50px);
+  font-size: clamp(9px,0.75vw,11px);
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.06em;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  backdrop-filter: blur(6px);
+}
+.footer-brand { font-weight: 600; color: rgba(255,255,255,0.4); }
+.footer-year  { font-weight: 400; }
 
-body{
-padding:10px;
+/* ====================== FADE UP KEYFRAME ====================== */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
 }
 
-h1{
-line-height:1.3;
+/* ====================== RESPONSIVE ====================== */
+@media (min-width:1600px) {
+  #main { max-width: 960px; }
 }
 
-.button-group{
-flex-direction:column;
-gap:12px;
+@media (max-width:600px) {
+  .logo-area { flex-direction: column; gap: 8px; }
+  .logo-divider { display: none; }
+  .logo-text-wrap { text-align: center; }
+  .button-group { flex-direction: column; align-items: stretch; }
+  .btn { justify-content: center; width: 100%; }
+  .status-sep { display: none; }
+  .status-row { gap: 12px; }
+  footer { justify-content: center; gap: 8px; }
 }
-
-.btn{
-width:100%;
-}
-
-footer{
-font-size:10px;
-}
-
-}
-
 </style>
 </head>
 
 <body>
 
+<div class="bg-photo"></div>
+<div class="bg-overlay"></div>
+<div class="bg-lines"></div>
+<div class="deco-rule"></div>
+
 <div id="main">
 
-<h1 id="typing"></h1>
+  <!-- LOGO -->
+  <div class="logo-area">
+    <img class="logo-img" src="logo-imigrasi.png" alt="Logo Imigrasi" onerror="this.style.display='none'">
+    <div class="logo-divider"></div>
+    <div class="logo-text-wrap">
+      <div class="logo-kw">KEMENTERIAN IMIGRASI DAN PEMASYARAKATAN RI</div>
+      <div class="logo-kw2">Kanwil Direktorat Jenderal Imigrasi<br>Sulawesi Selatan</div>
+    </div>
+  </div>
 
-<p>
-SULAWESI SELATAN
-</p>
+  <!-- ORNAMENT -->
+  <div class="ornament">
+    <div class="ornament-line"></div>
+    <div class="ornament-dot"></div>
+    <div class="ornament-line"></div>
+  </div>
 
-<div class="button-group">
+  <!-- HEADING -->
+  <div class="heading-eyebrow">Sistem Informasi Publik Digital</div>
 
-<button class="btn btn-primary"
-onclick="location.href='chatbot.html'">
-Asisten Virtual
-</button>
+  <h1 id="typing"><span id="typingText"></span><span id="cursor"></span></h1>
 
-<button class="btn btn-secondary"
-onclick="location.href='disabilitas.html'">
-Mode Disabilitas
-</button>
+  <p class="subtitle">
+    Layanan informasi keimigrasian <strong>interaktif berbasis AI</strong><br>
+    untuk wilayah Sulawesi Selatan
+  </p>
+
+  <!-- BUTTONS -->
+  <div class="button-group">
+
+    <button class="btn btn-primary" onclick="location.href='chatbot.html'">
+      <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+      Asisten Virtual
+    </button>
+
+    <button class="btn btn-info" onclick="location.href='video.html'">
+      <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="23 7 16 12 23 17 23 7"/>
+        <rect x="1" y="5" width="15" height="14" rx="2"/>
+      </svg>
+      Pusat Informasi Video
+    </button>
+
+    <button class="btn btn-access" onclick="location.href='disabilitas.html'">
+      <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="5" r="1.5"/>
+        <path d="M9 19l1.5-6 2.5 2 2-6"/>
+        <path d="M6.5 12.5C7.5 10 10 9 12 9"/>
+      </svg>
+      Mode Disabilitas
+    </button>
+
+  </div>
+
+  <!-- STATUS ROW -->
+  <div class="status-row">
+    <div class="status-item">
+      <div class="status-dot green"></div>
+      Asisten AI Aktif
+    </div>
+    <div class="status-sep"></div>
+    <div class="status-item">
+      <div class="status-dot teal"></div>
+      Bahasa Isyarat Tersedia
+    </div>
+    <div class="status-sep"></div>
+    <div class="status-item">
+      <div class="status-dot gold"></div>
+      Layanan 24 Jam
+    </div>
+  </div>
 
 </div>
 
-</div>
-
+<!-- FOOTER -->
 <footer>
-© Imigrasi Sulawesi Selatan
+  <span class="footer-brand">© Imigrasi Sulawesi Selatan</span>
+  <span class="footer-year" id="footerYear"></span>
 </footer>
 
 <script>
+/* ====================== TYPING EFFECT ====================== */
+const lines = [
+  "KANTOR WILAYAH",
+  "DIREKTORAT JENDERAL",
+  "IMIGRASI SULAWESI SELATAN"
+];
 
-/* =========================
-   TYPING EFFECT
-========================= */
-const text = "KANTOR WILAYAH DIREKTORAT JENDERAL IMIGRASI";
-let i = 0;
+const textEl = document.getElementById("typingText");
 
-function typeEffect(){
-  if(i < text.length){
-    document.getElementById("typing").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typeEffect, 35);
+let lineIdx = 0;
+let charIdx = 0;
+let phase   = "typing"; // typing | pause | erasing
+
+function tick() {
+  const line = lines[lineIdx];
+  const isLast = lineIdx === lines.length - 1;
+
+  if (phase === "typing") {
+    if (charIdx <= line.length) {
+      textEl.textContent = line.substring(0, charIdx);
+      charIdx++;
+      setTimeout(tick, 45);
+    } else {
+      // Berhenti permanen di baris terakhir "IMIGRASI"
+      if (isLast) return;
+      phase = "pause";
+      setTimeout(tick, 1200);
+    }
+
+  } else if (phase === "pause") {
+    phase = "erasing";
+    setTimeout(tick, 40);
+
+  } else { // erasing
+    if (charIdx > 0) {
+      charIdx--;
+      textEl.textContent = line.substring(0, charIdx);
+      setTimeout(tick, 25);
+    } else {
+      lineIdx++;
+      phase = "typing";
+      setTimeout(tick, 300);
+    }
   }
 }
 
-typeEffect();
+tick();
 
+/* ====================== FOOTER YEAR ====================== */
+document.getElementById("footerYear").textContent =
+  new Date().getFullYear() + " — Sistem Informasi Publik Digital";
 </script>
 
 </body>

@@ -2,376 +2,842 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Pusat Informasi</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pusat Informasi Bahasa Isyarat — Imigrasi Sulsel</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+/* ====================== VARIABLES ====================== */
+:root {
+  --navy:        #07204f;
+  --blue:        #0b3d91;
+  --blue-mid:    #1248b3;
+  --teal:        #0ea5a0;
+  --teal-light:  #5ee7e2;
+  --teal-glow:   rgba(14,165,160,0.25);
+  --gold:        #f0c040;
+  --white:       #ffffff;
+  --glass:       rgba(255,255,255,0.07);
+  --glass-hover: rgba(255,255,255,0.14);
+  --glass-active:rgba(14,165,160,0.22);
+  --border:      rgba(255,255,255,0.12);
+  --border-teal: rgba(14,165,160,0.5);
+  --shadow:      0 20px 60px rgba(0,0,0,0.55);
+  --shadow-teal: 0 0 30px rgba(14,165,160,0.3);
 
-/* =========================
-   GLOBAL
-========================= */
-body{
-margin:0;
-font-family:'Inter', sans-serif;
-color:white;
-
-background:
-linear-gradient(rgba(7,31,79,0.9), rgba(11,61,145,0.95)),
-url('bg.jpeg');
-background-size:cover;
-background-position:center;
-
-display:flex;
-flex-direction:column;
-align-items:center;
-
-min-height:100vh;
+  --fs-header:   clamp(13px, 1.8vw, 22px);
+  --fs-sub:      clamp(10px, 1vw, 14px);
+  --fs-badge:    clamp(9px,  0.8vw, 11px);
+  --fs-card-t:   clamp(12px, 1.1vw, 15px);
+  --fs-card-d:   clamp(10px, 0.85vw,12px);
+  --fs-counter:  clamp(11px, 0.9vw, 13px);
 }
 
-/* =========================
-   HEADER
-========================= */
-#header{
-width:100%;
-max-width:1300px;
-padding:15px;
-text-align:center;
-font-family:'Poppins';
-font-weight:600;
-background:rgba(0,0,0,0.3);
-backdrop-filter:blur(12px);
-border-radius:0 0 20px 20px;
+/* ====================== RESET ====================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ====================== BODY ====================== */
+body {
+  font-family: 'Outfit', sans-serif;
+  background:
+    linear-gradient(155deg, rgba(4,12,38,0.92) 0%, rgba(7,32,79,0.88) 45%, rgba(5,55,80,0.90) 100%),
+    url('bg.jpeg') center/cover no-repeat fixed;
+  color: var(--white);
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-/* =========================
-   BACK BUTTON (AMAN)
-========================= */
-#back{
-position:fixed;
-top:90px;
-left:20px;
-
-padding:10px 18px;
-border-radius:30px;
-
-background:rgba(255,255,255,0.15);
-backdrop-filter:blur(10px);
-
-cursor:pointer;
-z-index:50;
-
-transition:0.3s;
+/* ====================== HEADER ====================== */
+header {
+  flex-shrink: 0;
+  width: 100%;
+  padding: clamp(10px,1.8vh,16px) clamp(16px,3vw,40px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  z-index: 20;
 }
 
-#back:hover{
-background:rgba(255,255,255,0.3);
-transform:translateY(-2px);
+.header-logo {
+  width:  clamp(30px,3.5vw,50px);
+  height: clamp(30px,3.5vw,50px);
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
-/* =========================
-   CONTAINER
-========================= */
-#container{
-width:100%;
-max-width:1300px;
+.header-text { text-align: center; }
 
-display:flex;
-gap:25px;
-
-padding:20px;
-box-sizing:border-box;
-
-flex:1;
+.header-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: var(--fs-header);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
 }
 
-/* =========================
-   LEFT (VIDEO)
-========================= */
-#left{
-flex:1.6;
-display:flex;
+.header-sub {
+  font-size: var(--fs-sub);
+  color: var(--teal-light);
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  margin-top: 2px;
 }
 
-#videoBox{
-width:100%;
-height:clamp(400px, 65vh, 750px);
+/* Accessibility badge */
+.a11y-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--glass-active);
+  border: 1px solid var(--border-teal);
+  border-radius: 30px;
+  padding: 5px 12px;
+  font-size: var(--fs-badge);
+  font-weight: 600;
+  color: var(--teal-light);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.a11y-badge svg { width: 14px; height: 14px; }
 
-border-radius:24px;
-overflow:hidden;
-position:relative;
+/* ====================== BACK ====================== */
+#back {
+  position: fixed;
+  top: clamp(10px,2vh,18px);
+  left: clamp(12px,2vw,24px);
+  padding: 7px 16px;
+  border-radius: 30px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  font-size: clamp(11px,0.9vw,13px);
+  font-weight: 500;
+  color: var(--white);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+#back:hover { background: var(--glass-hover); }
+#back::before { content: '←'; }
 
-box-shadow:0 20px 60px rgba(0,0,0,0.7);
+/* ====================== MAIN LAYOUT ====================== */
+#main {
+  flex: 1;
+  display: flex;
+  gap: clamp(12px,2vw,24px);
+  padding: clamp(10px,2vh,18px) clamp(12px,2vw,24px);
+  overflow: hidden;
 }
 
-/* PLAYER */
-#mainVideo{
-width:100%;
-height:100%;
+/* ====================== LEFT — VIDEO AREA ====================== */
+#left {
+  flex: 1.65;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px,1.2vh,14px);
+  min-width: 0;
 }
 
-/* OVERLAY */
-#videoOverlay{
-position:absolute;
-top:0;
-width:100%;
-padding:20px;
-background:linear-gradient(to bottom, rgba(0,0,0,0.7), transparent);
+/* Video wrapper */
+#videoBox {
+  position: relative;
+  border-radius: clamp(14px,2vw,22px);
+  overflow: hidden;
+  box-shadow: var(--shadow), var(--shadow-teal);
+  border: 1px solid var(--border-teal);
+  background: #000;
+  flex: 1;
 }
 
-#videoTitle{
-font-family:'Poppins';
-font-size:18px;
+#mainVideo {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-/* =========================
-   RIGHT (LIST)
-========================= */
-#right{
-flex:1.1;
-padding:20px;
-
-display:flex;
-flex-direction:column;
-gap:12px;
-
-height:clamp(400px, 65vh, 750px);
-overflow-y:auto;
-
-background:rgba(255,255,255,0.08);
-backdrop-filter:blur(15px);
-border-radius:20px;
+/* Video title overlay */
+#videoOverlay {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  padding: clamp(12px,2vw,20px);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.75) 0%, transparent 100%);
+  pointer-events: none;
 }
 
-/* CARD */
-.card{
-display:flex;
-gap:15px;
-align-items:center;
-cursor:pointer;
-padding:12px;
-border-radius:14px;
-
-transition:0.3s;
-
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.08);
+#videoTitle {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(14px,1.6vw,22px);
+  font-weight: 700;
+  line-height: 1.3;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
 
-.card:hover{
-background:rgba(255,255,255,0.15);
-transform:translateX(6px);
+#videoDesc {
+  font-size: clamp(11px,0.9vw,13px);
+  color: var(--teal-light);
+  margin-top: 4px;
+  font-weight: 500;
 }
 
-.card.active{
-background:rgba(255,255,255,0.25);
-box-shadow:0 0 15px rgba(255,255,255,0.3);
+/* Accessibility indicator bottom-left */
+#videoBox .sign-badge {
+  position: absolute;
+  bottom: clamp(10px,1.5vw,16px);
+  left: clamp(10px,1.5vw,16px);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(14,165,160,0.85);
+  border-radius: 8px;
+  padding: 5px 12px;
+  font-size: clamp(10px,0.8vw,12px);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+  animation: pulse-badge 2.5s ease-in-out infinite;
+}
+@keyframes pulse-badge {
+  0%,100% { opacity: 0.9; }
+  50%      { opacity: 1; box-shadow: 0 0 12px rgba(94,231,226,0.6); }
 }
 
-/* THUMB */
-.thumb{
-width:110px;
-height:70px;
-border-radius:10px;
-background-size:cover;
-background-position:center;
-position:relative;
-flex-shrink:0;
+/* Info bar below video */
+#infoBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: clamp(10px,1.2vw,14px);
+  padding: clamp(8px,1.2vh,12px) clamp(12px,1.5vw,18px);
+  backdrop-filter: blur(10px);
+  flex-shrink: 0;
+  gap: 12px;
 }
 
-.thumb::after{
-content:'▶';
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-background:rgba(0,0,0,0.6);
-padding:6px 10px;
-border-radius:50%;
+.info-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-/* TEXT */
-.info{
-display:flex;
-flex-direction:column;
+.info-label {
+  font-size: clamp(10px,0.78vw,12px);
+  color: rgba(255,255,255,0.5);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
 }
 
-.title{
-font-size:14px;
-font-weight:600;
+.info-value {
+  font-size: clamp(11px,0.85vw,13px);
+  color: var(--white);
+  font-weight: 600;
 }
 
-.desc{
-font-size:12px;
-opacity:0.7;
+#videoCounter {
+  font-size: var(--fs-counter);
+  color: var(--teal-light);
+  font-weight: 700;
+  white-space: nowrap;
 }
 
-/* SCROLL */
-#right::-webkit-scrollbar{
-width:6px;
+/* Autoplay toggle */
+.toggle-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
 }
-#right::-webkit-scrollbar-thumb{
-background:rgba(255,255,255,0.3);
-border-radius:10px;
+.toggle-label { font-size: clamp(10px,0.8vw,12px); color: rgba(255,255,255,0.6); font-weight: 500; }
+.toggle-track {
+  width: 36px; height: 20px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  position: relative;
+  transition: background 0.25s;
 }
-
-/* =========================
-   LARGE SCREEN FIX
-========================= */
-@media (min-width:1600px){
-#container{
-max-width:1400px;
+.toggle-track.on { background: var(--teal); }
+.toggle-knob {
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 16px; height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.25s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
-}
+.toggle-track.on .toggle-knob { transform: translateX(16px); }
 
-/* =========================
-   TABLET
-========================= */
-@media (max-width:900px){
-
-#container{
-flex-direction:column;
-}
-
-#videoBox{
-height:300px;
-}
-
-#right{
-height:300px;
-}
-
-}
-
-/* =========================
-   MOBILE
-========================= */
-@media (max-width:600px){
-
-#container{
-padding:10px;
-gap:15px;
+/* ====================== RIGHT — PLAYLIST ====================== */
+#right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px,1vh,10px);
+  min-width: 0;
 }
 
-#videoBox{
-height:220px;
-border-radius:15px;
+/* Search box */
+#searchWrap {
+  flex-shrink: 0;
+  position: relative;
 }
 
-#right{
-height:250px;
-padding:10px;
+#searchBox {
+  width: 100%;
+  padding: clamp(8px,1.2vh,12px) clamp(14px,1.5vw,18px) clamp(8px,1.2vh,12px) clamp(36px,3.5vw,44px);
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  color: var(--white);
+  font-size: clamp(12px,0.95vw,14px);
+  font-family: 'Outfit', sans-serif;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  backdrop-filter: blur(10px);
+}
+#searchBox::placeholder { color: rgba(255,255,255,0.38); }
+#searchBox:focus { border-color: var(--teal); background: var(--glass-hover); }
+
+.search-icon {
+  position: absolute;
+  left: clamp(12px,1.2vw,16px);
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.45;
+  pointer-events: none;
+  width: clamp(14px,1.2vw,18px);
+  height: clamp(14px,1.2vw,18px);
 }
 
-.thumb{
-width:90px;
-height:60px;
+/* Category filters */
+#filters {
+  flex-shrink: 0;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
-#back{
-top:70px;
-left:10px;
+.filter-btn {
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--glass);
+  color: rgba(255,255,255,0.65);
+  font-size: clamp(10px,0.78vw,12px);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: 0.04em;
+}
+.filter-btn:hover { background: var(--glass-hover); color: #fff; }
+.filter-btn.active {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: #fff;
+  box-shadow: 0 0 14px rgba(14,165,160,0.4);
 }
 
+/* Section label -->
+.playlist-label {
+  flex-shrink: 0;
+  font-size: clamp(9px,0.75vw,11px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.4);
+  padding: 0 4px;
 }
 
+/* Video list */
+#videoList {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-right: 4px;
+}
+#videoList::-webkit-scrollbar { width: 4px; }
+#videoList::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); border-radius: 10px; }
+#videoList::-webkit-scrollbar-track { background: transparent; }
+
+/* Empty state */
+#emptyState {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: rgba(255,255,255,0.35);
+  padding: 30px 0;
+  font-size: clamp(12px,1vw,14px);
+  text-align: center;
+}
+#emptyState svg { width: 40px; height: 40px; opacity: 0.3; }
+
+/* ====================== VIDEO CARD ====================== */
+.card {
+  display: flex;
+  gap: clamp(8px,1vw,12px);
+  align-items: center;
+  cursor: pointer;
+  padding: clamp(8px,1vh,11px) clamp(10px,1vw,14px);
+  border-radius: clamp(10px,1.2vw,14px);
+  background: var(--glass);
+  border: 1px solid var(--border);
+  transition: background 0.22s, transform 0.22s, border-color 0.22s;
+  position: relative;
+  overflow: hidden;
+  animation: cardIn 0.3s ease both;
+  flex-shrink: 0;
+}
+.card:hover {
+  background: var(--glass-hover);
+  transform: translateX(4px);
+  border-color: rgba(255,255,255,0.2);
+}
+.card.active {
+  background: var(--glass-active);
+  border-color: var(--border-teal);
+  box-shadow: var(--shadow-teal);
+}
+.card.active::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--teal);
+  border-radius: 2px 0 0 2px;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateX(12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Thumbnail */
+.thumb {
+  width:  clamp(80px,8.5vw,115px);
+  height: clamp(50px,5.5vw,70px);
+  border-radius: clamp(6px,0.8vw,10px);
+  background-size: cover;
+  background-position: center;
+  background-color: #0a1f50;
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.thumb-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  transition: background 0.2s;
+}
+.card:hover .thumb-play,
+.card.active .thumb-play { background: rgba(14,165,160,0.45); }
+.thumb-play svg { width: clamp(14px,1.5vw,20px); height: clamp(14px,1.5vw,20px); }
+
+/* Card text */
+.card-info { flex: 1; min-width: 0; }
+.card-title {
+  font-size: var(--fs-card-t);
+  font-weight: 700;
+  font-family: 'Nunito', sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+.card-desc {
+  font-size: var(--fs-card-d);
+  color: rgba(255,255,255,0.55);
+  margin-top: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card-cat {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: clamp(9px,0.7vw,10px);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: rgba(14,165,160,0.2);
+  color: var(--teal-light);
+  border: 1px solid rgba(14,165,160,0.3);
+}
+
+/* Number badge */
+.card-num {
+  font-size: clamp(10px,0.8vw,12px);
+  font-weight: 700;
+  color: rgba(255,255,255,0.2);
+  flex-shrink: 0;
+  min-width: 20px;
+  text-align: right;
+}
+.card.active .card-num { color: var(--teal-light); }
+
+/* ====================== TABLET ====================== */
+@media (max-width: 960px) {
+  #main { flex-direction: column; overflow-y: auto; }
+  body { overflow: auto; height: auto; min-height: 100dvh; }
+  #left { flex: none; }
+  #videoBox { height: clamp(220px,45vw,380px); }
+  #right { flex: none; min-height: 320px; }
+}
+
+/* ====================== MOBILE ====================== */
+@media (max-width: 600px) {
+  #main { padding: 8px; gap: 8px; }
+  #videoBox { height: 210px; border-radius: 12px; }
+  #filters { display: none; }
+  #right { min-height: 280px; }
+  .thumb { width: 78px; height: 48px; }
+}
 </style>
 </head>
 
 <body>
 
-<div id="header">PUSAT INFORMASI</div>
+<!-- HEADER -->
+<header>
+  <img class="header-logo" src="logo-imigrasi.png" alt="Logo" onerror="this.style.display='none'">
+  <div class="header-text">
+    <div class="header-title">PUSAT INFORMASI BAHASA ISYARAT</div>
+    <div class="header-sub">Layanan Aksesibilitas — Kantor Imigrasi Sulawesi Selatan</div>
+  </div>
+  <div class="a11y-badge">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M8 12l2 2 4-4"/>
+    </svg>
+    BISINDO
+  </div>
+</header>
 
-<!-- BACK BUTTON -->
-<div id="back" onclick="location.href='index.html'">
-Kembali
+<!-- BACK -->
+<a id="back" href="index.html">Beranda</a>
+
+<!-- MAIN -->
+<div id="main">
+
+  <!-- LEFT: VIDEO -->
+  <div id="left">
+    <div id="videoBox">
+      <div id="mainVideo"></div>
+
+      <div id="videoOverlay">
+        <div id="videoTitle">Memuat video...</div>
+        <div id="videoDesc">Bahasa Isyarat Indonesia (BISINDO)</div>
+      </div>
+
+      <div class="sign-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 11v-1a5 5 0 0 1 10 0v1"/>
+          <rect x="3" y="11" width="18" height="11" rx="2"/>
+          <circle cx="12" cy="16" r="1"/>
+        </svg>
+        BAHASA ISYARAT
+      </div>
+    </div>
+
+    <!-- INFO BAR -->
+    <div id="infoBar">
+      <div class="info-group">
+        <span class="info-label">Memutar</span>
+        <span class="info-value" id="nowPlayingLabel">—</span>
+      </div>
+
+      <span id="videoCounter">1 / 8</span>
+
+      <div class="toggle-wrap" onclick="toggleAutoplay()" title="Putar otomatis ke video berikutnya">
+        <span class="toggle-label">Putar Otomatis</span>
+        <div class="toggle-track on" id="autoplayTrack">
+          <div class="toggle-knob"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: PLAYLIST -->
+  <div id="right">
+    <!-- Search -->
+    <div id="searchWrap">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input id="searchBox" type="text" placeholder="Cari video bahasa isyarat..." oninput="filterVideos()">
+    </div>
+
+    <!-- Category filters -->
+    <div id="filters">
+      <button class="filter-btn active" data-cat="semua" onclick="filterCat(this)">Semua</button>
+      <button class="filter-btn" data-cat="umum"     onclick="filterCat(this)">Umum</button>
+      <button class="filter-btn" data-cat="paspor"   onclick="filterCat(this)">Paspor</button>
+      <button class="filter-btn" data-cat="wna"      onclick="filterCat(this)">WNA</button>
+      <button class="filter-btn" data-cat="biaya"    onclick="filterCat(this)">Biaya</button>
+    </div>
+
+    <div class="playlist-label" id="playlistLabel">8 video tersedia</div>
+
+    <!-- List -->
+    <div id="videoList">
+      <div id="emptyState">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <span>Tidak ada video ditemukan</span>
+      </div>
+    </div>
+  </div>
+
 </div>
 
-<div id="container">
-
-<!-- VIDEO -->
-<div id="left">
-<div id="videoBox">
-
-<div id="mainVideo"></div>
-
-<div id="videoOverlay">
-<div id="videoTitle">Selamat Datang</div>
-</div>
-
-</div>
-</div>
-
-<!-- LIST -->
-<div id="right"></div>
-
-</div>
-
+<!-- YouTube IFrame API -->
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
-
+/* ====================== DATA ====================== */
 const videos = [
-{ id:"HWwyL9PlnXU", title:"Selamat Datang", desc:"Video pembuka" },
-{ id:"z2JAVhx6tE8", title:"Tata Usaha", desc:"Administrasi" },
-{ id:"SZf24XHDIbI", title:"Dokumen Perjalanan", desc:"Layanan paspor" },
-{ id:"crE6hjTb9A8", title:"Pengawasan", desc:"Pengawasan WNA" },
-{ id:"CJKAgLFXJvA", title:"Intelijen", desc:"Keamanan internal" },
-{ id:"JjYwEbTkc_I", title:"Biaya Paspor", desc:"Informasi biaya" },
-{ id:"GJBrbVdZNdM", title:"Persyaratan", desc:"Dokumen wajib" },
-{ id:"DBdg0bxPRDw", title:"Tarif", desc:"Izin tinggal" }
+  { id:"HWwyL9PlnXU", title:"Selamat Datang",          desc:"Pengenalan layanan imigrasi",          cat:"umum"   },
+  { id:"z2JAVhx6tE8", title:"Tata Usaha",               desc:"Prosedur administrasi kantor",          cat:"umum"   },
+  { id:"SZf24XHDIbI", title:"Dokumen Perjalanan",        desc:"Informasi paspor & visa",              cat:"paspor" },
+  { id:"crE6hjTb9A8", title:"Pengawasan Keimigrasian",   desc:"Pengawasan warga negara asing",        cat:"wna"    },
+  { id:"CJKAgLFXJvA", title:"Intelijen Keimigrasian",    desc:"Keamanan dan intelijen internal",      cat:"umum"   },
+  { id:"JjYwEbTkc_I", title:"Biaya Pembuatan Paspor",    desc:"Rincian tarif layanan paspor",         cat:"biaya"  },
+  { id:"GJBrbVdZNdM", title:"Persyaratan Dokumen",       desc:"Dokumen wajib yang perlu disiapkan",   cat:"paspor" },
+  { id:"DBdg0bxPRDw", title:"Tarif Izin Tinggal",        desc:"Biaya permohonan izin tinggal WNA",    cat:"biaya"  }
 ];
 
-let player;
-let current = 0;
+/* ====================== STATE ====================== */
+let player       = null;
+let current      = 0;
+let autoplay     = true;
+let activeCat    = "semua";
+let searchQuery  = "";
 
-function onYouTubeIframeAPIReady(){
-player = new YT.Player('mainVideo', {
-height: '100%',
-width: '100%',
-videoId: videos[0].id,
-playerVars: { autoplay: 1, mute: 1 }
-});
+/* ====================== YOUTUBE API ====================== */
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('mainVideo', {
+    height: '100%',
+    width:  '100%',
+    videoId: videos[0].id,
+    playerVars: {
+      autoplay: 1,
+      mute: 0,
+      rel: 0,
+      modestbranding: 1,
+      cc_load_policy: 0
+    },
+    events: {
+      onReady:       onPlayerReady,
+      onStateChange: onPlayerStateChange
+    }
+  });
 }
 
-const container = document.getElementById("right");
-
-videos.forEach((v,i)=>{
-let div = document.createElement("div");
-div.className = "card";
-if(i===0) div.classList.add("active");
-
-div.onclick = ()=>playVideo(i);
-
-div.innerHTML = `
-<div class="thumb" style="background-image:url('https://img.youtube.com/vi/${v.id}/hqdefault.jpg')"></div>
-<div class="info">
-<div class="title">${v.title}</div>
-<div class="desc">${v.desc}</div>
-</div>
-`;
-
-container.appendChild(div);
-});
-
-function playVideo(index){
-
-current = index;
-
-player.loadVideoById(videos[index].id);
-
-document.getElementById("videoTitle").innerText = videos[index].title;
-
-document.querySelectorAll(".card").forEach(c=>c.classList.remove("active"));
-container.children[index].classList.add("active");
-
-container.children[index].scrollIntoView({
-behavior:"smooth",
-block:"center"
-});
-
+function onPlayerReady() {
+  updateOverlay(0);
+  player.playVideo();
 }
 
+function onPlayerStateChange(e) {
+  // Ended = 0 → autoplay next
+  if (e.data === YT.PlayerState.ENDED && autoplay) {
+    const visible = getVisibleVideos();
+    const idx = visible.findIndex(v => v.originalIndex === current);
+    if (idx !== -1 && idx < visible.length - 1) {
+      playVideo(visible[idx + 1].originalIndex);
+    }
+  }
+}
+
+/* ====================== PLAY VIDEO ====================== */
+function playVideo(index) {
+  current = index;
+  if (player && player.loadVideoById) {
+    player.loadVideoById(videos[index].id);
+  }
+  updateOverlay(index);
+  updateActiveCard(index);
+  updateCounter();
+}
+
+function updateOverlay(index) {
+  document.getElementById("videoTitle").textContent = videos[index].title;
+  document.getElementById("videoDesc").textContent  = videos[index].desc + " — Bahasa Isyarat (BISINDO)";
+  document.getElementById("nowPlayingLabel").textContent = videos[index].title;
+}
+
+function updateActiveCard(index) {
+  document.querySelectorAll(".card").forEach(c => {
+    c.classList.toggle("active", parseInt(c.dataset.index) === index);
+  });
+
+  // Scroll active card into view
+  const active = document.querySelector(".card.active");
+  if (active) active.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+function updateCounter() {
+  const visible = getVisibleVideos();
+  const pos = visible.findIndex(v => v.originalIndex === current);
+  document.getElementById("videoCounter").textContent =
+    (pos !== -1 ? pos + 1 : "—") + " / " + visible.length;
+}
+
+/* ====================== RENDER CARDS ====================== */
+function getVisibleVideos() {
+  return videos
+    .map((v, i) => ({ ...v, originalIndex: i }))
+    .filter(v => {
+      const matchCat   = activeCat === "semua" || v.cat === activeCat;
+      const matchSearch = v.title.toLowerCase().includes(searchQuery) ||
+                          v.desc.toLowerCase().includes(searchQuery);
+      return matchCat && matchSearch;
+    });
+}
+
+function renderCards() {
+  const list    = document.getElementById("videoList");
+  const empty   = document.getElementById("emptyState");
+  const visible = getVisibleVideos();
+
+  // Remove existing cards (keep emptyState)
+  list.querySelectorAll(".card").forEach(c => c.remove());
+
+  if (visible.length === 0) {
+    empty.style.display = "flex";
+    document.getElementById("playlistLabel").textContent = "Tidak ada hasil";
+    updateCounter();
+    return;
+  }
+
+  empty.style.display = "none";
+  document.getElementById("playlistLabel").textContent =
+    visible.length + " video tersedia";
+
+  visible.forEach((v, i) => {
+    const card = document.createElement("div");
+    card.className = "card" + (v.originalIndex === current ? " active" : "");
+    card.dataset.index = v.originalIndex;
+    card.style.animationDelay = (i * 0.04) + "s";
+
+    card.innerHTML = `
+      <div class="thumb" style="background-image:url('https://img.youtube.com/vi/${v.id}/mqdefault.jpg')">
+        <div class="thumb-play">
+          <svg viewBox="0 0 24 24" fill="white" stroke="none">
+            <polygon points="5 3 19 12 5 21 5 3"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-title">${v.title}</div>
+        <div class="card-desc">${v.desc}</div>
+        <span class="card-cat">${v.cat.toUpperCase()}</span>
+      </div>
+      <div class="card-num">${i + 1}</div>
+    `;
+
+    card.onclick = () => playVideo(v.originalIndex);
+    list.appendChild(card);
+  });
+
+  updateCounter();
+}
+
+/* ====================== FILTER / SEARCH ====================== */
+function filterCat(btn) {
+  activeCat = btn.dataset.cat;
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  renderCards();
+}
+
+function filterVideos() {
+  searchQuery = document.getElementById("searchBox").value.toLowerCase().trim();
+  renderCards();
+}
+
+/* ====================== AUTOPLAY TOGGLE ====================== */
+function toggleAutoplay() {
+  autoplay = !autoplay;
+  const track = document.getElementById("autoplayTrack");
+  track.classList.toggle("on", autoplay);
+}
+
+/* ====================== IDLE RESET (kiosk) ====================== */
+let idleTimer;
+const IDLE_MS = 5 * 60 * 1000; // 5 menit
+
+function resetIdle() {
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(() => {
+    // Reset ke video pertama & hentikan
+    if (player && player.stopVideo) player.stopVideo();
+    playVideo(0);
+    activeCat   = "semua";
+    searchQuery = "";
+    document.getElementById("searchBox").value = "";
+    document.querySelectorAll(".filter-btn").forEach(b =>
+      b.classList.toggle("active", b.dataset.cat === "semua")
+    );
+    renderCards();
+  }, IDLE_MS);
+}
+
+["mousemove","keydown","touchstart","click"].forEach(e =>
+  document.addEventListener(e, resetIdle, { passive: true })
+);
+
+/* ====================== KEYBOARD SHORTCUTS ====================== */
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "INPUT") return;
+
+  const visible = getVisibleVideos();
+  const pos = visible.findIndex(v => v.originalIndex === current);
+
+  if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+    e.preventDefault();
+    if (pos < visible.length - 1) playVideo(visible[pos + 1].originalIndex);
+  }
+  if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+    e.preventDefault();
+    if (pos > 0) playVideo(visible[pos - 1].originalIndex);
+  }
+  if (e.key === "/" ) {
+    e.preventDefault();
+    document.getElementById("searchBox").focus();
+  }
+});
+
+/* ====================== INIT ====================== */
+renderCards();
+resetIdle();
 </script>
 
 </body>
