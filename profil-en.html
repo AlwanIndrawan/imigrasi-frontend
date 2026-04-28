@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile — Kanwil Ditjen Immigration South Sulawesi</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --navy:         #060f2e;
+  --blue:         #0b3d91;
+  --blue-mid:     #1248b3;
+  --gold:         #c9a84c;
+  --gold-light:   #e8c97a;
+  --gold-pale:    rgba(201,168,76,0.12);
+  --gold-border:  rgba(201,168,76,0.30);
+  --teal:         #0ea5a0;
+  --teal-pale:    rgba(14,165,160,0.12);
+  --teal-border:  rgba(14,165,160,0.30);
+  --white:        #f0f4ff;
+  --glass:        rgba(255,255,255,0.055);
+  --glass-hover:  rgba(255,255,255,0.10);
+  --border:       rgba(255,255,255,0.09);
+  --text-muted:   rgba(255,255,255,0.50);
+  --text-sub:     rgba(255,255,255,0.72);
+  --radius:       16px;
+  --radius-sm:    10px;
+  --section-gap:  clamp(60px,10vh,110px);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+img { max-width: 100%; display: block; }
+a   { text-decoration: none; color: inherit; }
+
+.bg-photo {
+  position: fixed; inset: 0;
+  background: url('bg.jpeg') center/cover no-repeat;
+  z-index: 0;
+}
+.bg-overlay {
+  position: fixed; inset: 0;
+  background: linear-gradient(160deg,
+    rgba(4,10,32,0.96) 0%,
+    rgba(7,31,79,0.92) 50%,
+    rgba(5,45,70,0.94) 100%);
+  z-index: 1;
+}
+
+/* NAV */
+#stickyNav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(16px,4vw,50px);
+  height: clamp(52px,7vh,68px);
+  background: rgba(6,15,46,0.82);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-brand {
+  display: flex; align-items: center; gap: 10px;
+  font-size: clamp(11px,0.9vw,13px); font-weight: 600;
+  letter-spacing: 0.04em; color: rgba(255,255,255,0.7);
+  white-space: nowrap;
+}
+.nav-brand img { width: clamp(26px,3vw,36px); height: clamp(26px,3vw,36px); object-fit: contain; }
+.nav-links { display: flex; gap: clamp(4px,1.5vw,28px); list-style: none; }
+.nav-links a {
+  font-size: clamp(10px,0.8vw,12px); font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-muted); padding: 4px 2px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s; white-space: nowrap;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--gold-light); border-color: var(--gold); }
+.nav-back {
+  font-size: clamp(10px,0.8vw,12px); font-weight: 600;
+  color: var(--text-muted); padding: 6px 14px;
+  border: 1px solid var(--border); border-radius: 30px;
+  transition: background 0.2s, color 0.2s; white-space: nowrap;
+}
+.nav-back:hover { background: var(--glass-hover); color: #fff; }
+@media (max-width: 768px) { .nav-links { display: none; } }
+
+/* PAGE */
+#page { position: relative; z-index: 10; padding-top: clamp(52px,7vh,68px); }
+
+/* SECTION */
+.section {
+  width: 100%; max-width: 1140px;
+  margin: 0 auto;
+  padding: var(--section-gap) clamp(16px,5vw,50px);
+  opacity: 0; transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.section.visible { opacity: 1; transform: translateY(0); }
+
+.sec-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: clamp(9px,0.75vw,11px); font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold-light); margin-bottom: clamp(10px,2vh,16px); opacity: 0.8;
+}
+.sec-label::before {
+  content: ''; display: block; width: 20px; height: 2px;
+  background: var(--gold); border-radius: 2px;
+}
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px,3.5vw,42px); font-weight: 900;
+  line-height: 1.2; letter-spacing: 0.01em;
+  margin-bottom: clamp(12px,2.5vh,20px);
+  background: linear-gradient(135deg, #fff 0%, #d4e4ff 60%, var(--gold-light) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.sec-body { font-size: clamp(13px,1.1vw,16px); color: var(--text-sub); max-width: 680px; line-height: 1.8; }
+.ornament { display: flex; align-items: center; gap: 10px; margin: clamp(16px,3vh,28px) 0; }
+.orn-line { height: 1px; background: linear-gradient(to right, var(--gold), transparent); flex: 1; opacity: 0.25; }
+.orn-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); opacity: 0.6; }
+
+/* HERO */
+#hero {
+  min-height: 100dvh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  max-width: 860px;
+  padding: clamp(80px,12vh,120px) clamp(16px,5vw,40px) clamp(60px,8vh,80px);
+  animation: heroIn 1s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes heroIn { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
+.hero-kw {
+  font-size: clamp(10px,0.85vw,13px); font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold-light); opacity: 0.75; margin-bottom: clamp(14px,3vh,24px);
+}
+#hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px,6vw,72px); font-weight: 900; line-height: 1.12;
+  margin-bottom: clamp(16px,3vh,26px);
+  background: linear-gradient(135deg, #fff 0%, #cce0ff 50%, var(--gold-light) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-sub { font-size: clamp(13px,1.3vw,17px); color: var(--text-sub); max-width: 580px; margin: 0 auto clamp(28px,5vh,44px); line-height: 1.8; }
+.hero-cta { display: flex; gap: clamp(10px,1.5vw,16px); justify-content: center; flex-wrap: wrap; }
+.btn-hero {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: clamp(12px,1.5vh,15px) clamp(20px,2.5vw,30px);
+  font-size: clamp(12px,1vw,14px); font-family: 'Outfit', sans-serif;
+  font-weight: 600; border-radius: 12px; cursor: pointer; border: none;
+  transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s;
+  letter-spacing: 0.04em;
+}
+.btn-hero:hover { transform: translateY(-3px) scale(1.02); }
+.btn-hero-primary { background: linear-gradient(135deg,#1248b3,#0b3d91); color: #fff; border: 1px solid rgba(255,255,255,0.18); box-shadow: 0 6px 24px rgba(0,0,0,0.4); }
+.btn-hero-primary:hover { box-shadow: 0 12px 32px rgba(11,61,145,0.65); }
+.btn-hero-ghost { background: var(--glass); color: var(--white); border: 1px solid var(--gold-border); backdrop-filter: blur(10px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+.btn-hero-ghost:hover { border-color: rgba(201,168,76,0.6); box-shadow: 0 12px 32px rgba(0,0,0,0.4); }
+.scroll-hint {
+  position: absolute; bottom: clamp(20px,4vh,36px); left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  color: var(--text-muted); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  animation: scrollBob 2s ease-in-out infinite;
+}
+.scroll-hint svg { width: 18px; height: 18px; opacity: 0.5; }
+@keyframes scrollBob { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(7px); } }
+
+/* STATS */
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(10px,1.5vw,18px); margin-top: clamp(30px,5vh,50px); }
+.stat-card {
+  background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: clamp(16px,2.5vh,26px) clamp(14px,2vw,24px); text-align: center;
+  backdrop-filter: blur(12px); transition: background 0.25s, transform 0.25s;
+}
+.stat-card:hover { background: var(--glass-hover); transform: translateY(-4px); }
+.stat-num { font-family: 'Playfair Display', serif; font-size: clamp(28px,3.5vw,48px); font-weight: 900; line-height: 1; color: var(--gold-light); display: block; }
+.stat-label { font-size: clamp(10px,0.8vw,12px); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-top: 6px; }
+@media (max-width: 640px) { .stats-row { grid-template-columns: repeat(2,1fr); } }
+
+/* TWO COL */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px,4vw,60px); align-items: center; }
+.photo-frame { position: relative; border-radius: clamp(14px,2vw,22px); overflow: hidden; aspect-ratio: 4/3; background: var(--glass); border: 1px solid var(--border); }
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; }
+.photo-frame::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(14,165,160,0.15), rgba(201,168,76,0.08)); pointer-events: none; }
+.photo-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: clamp(40px,6vw,80px); opacity: 0.15; }
+@media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: clamp(28px,4vw,50px); margin-top: clamp(24px,4vh,40px); }
+.timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--gold), var(--teal), transparent); opacity: 0.35; }
+.tl-item { position: relative; padding-bottom: clamp(24px,4vh,38px); }
+.tl-item:last-child { padding-bottom: 0; }
+.tl-dot { position: absolute; left: calc(-1 * clamp(28px,4vw,50px) - 6px); top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--gold); border: 2px solid var(--navy); box-shadow: 0 0 10px rgba(201,168,76,0.5); }
+.tl-item:nth-child(even) .tl-dot { background: var(--teal); box-shadow: 0 0 10px rgba(14,165,160,0.5); }
+.tl-year { font-size: clamp(10px,0.8vw,12px); font-weight: 700; letter-spacing: 0.12em; color: var(--gold-light); text-transform: uppercase; margin-bottom: 4px; }
+.tl-item:nth-child(even) .tl-year { color: #5ee7e2; }
+.tl-title { font-family: 'Playfair Display', serif; font-size: clamp(14px,1.4vw,18px); font-weight: 700; margin-bottom: 6px; }
+.tl-desc { font-size: clamp(12px,0.9vw,14px); color: var(--text-sub); line-height: 1.7; }
+
+/* FUNC GRID */
+.func-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(10px,1.5vw,18px); margin-top: clamp(24px,4vh,40px); }
+.func-card { background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius); padding: clamp(18px,2.5vh,28px) clamp(14px,2vw,22px); text-align: center; backdrop-filter: blur(12px); transition: background 0.25s, transform 0.25s, border-color 0.25s; cursor: default; }
+.func-card:hover { background: var(--glass-hover); transform: translateY(-5px); border-color: var(--gold-border); }
+.func-icon { width: clamp(42px,5vw,58px); height: clamp(42px,5vw,58px); border-radius: 14px; background: var(--gold-pale); border: 1px solid var(--gold-border); display: flex; align-items: center; justify-content: center; margin: 0 auto clamp(12px,2vh,18px); }
+.func-icon svg { width: clamp(20px,2.2vw,26px); height: clamp(20px,2.2vw,26px); color: var(--gold-light); }
+.func-title { font-family: 'Playfair Display', serif; font-size: clamp(14px,1.3vw,17px); font-weight: 700; margin-bottom: 8px; }
+.func-desc { font-size: clamp(11px,0.85vw,13px); color: var(--text-sub); line-height: 1.7; }
+@media (max-width: 900px) { .func-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 480px) { .func-grid { grid-template-columns: 1fr; } }
+
+/* VISI MISI */
+.vm-section { background: linear-gradient(135deg, rgba(11,61,145,0.18), rgba(14,165,160,0.08)); border: 1px solid var(--border); border-radius: clamp(16px,2.5vw,24px); padding: clamp(28px,5vh,50px) clamp(20px,4vw,50px); backdrop-filter: blur(14px); }
+.visi-box { background: var(--gold-pale); border: 1px solid var(--gold-border); border-radius: var(--radius); padding: clamp(18px,3vh,28px) clamp(18px,3vw,30px); margin-bottom: clamp(20px,4vh,34px); position: relative; overflow: hidden; }
+.visi-box::before { content: '"'; position: absolute; top: -10px; left: 14px; font-family: 'Playfair Display', serif; font-size: 120px; color: var(--gold); opacity: 0.08; line-height: 1; pointer-events: none; }
+.visi-text { font-family: 'Playfair Display', serif; font-size: clamp(14px,1.4vw,18px); font-weight: 700; font-style: italic; line-height: 1.65; color: var(--gold-light); }
+.misi-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.misi-item { display: flex; align-items: flex-start; gap: 12px; font-size: clamp(12px,1vw,15px); color: var(--text-sub); line-height: 1.65; }
+.misi-num { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: var(--teal-pale); border: 1px solid var(--teal-border); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #5ee7e2; margin-top: 2px; }
+
+/* PRIMA */
+.prima-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: clamp(8px,1.2vw,14px); margin-top: clamp(24px,4vh,40px); }
+.prima-card { background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius); padding: clamp(16px,2.5vh,26px) clamp(12px,1.5vw,18px); text-align: center; backdrop-filter: blur(12px); transition: background 0.25s, transform 0.25s, border-color 0.25s, box-shadow 0.25s; cursor: default; position: relative; overflow: hidden; }
+.prima-card::before { content: attr(data-letter); position: absolute; bottom: -10px; right: 4px; font-family: 'Playfair Display', serif; font-size: 80px; font-weight: 900; color: var(--gold); opacity: 0.04; line-height: 1; pointer-events: none; }
+.prima-card:hover { background: var(--glass-hover); transform: translateY(-6px); border-color: var(--gold-border); box-shadow: 0 12px 30px rgba(0,0,0,0.35), 0 0 0 1px rgba(201,168,76,0.2); }
+.prima-letter { font-family: 'Playfair Display', serif; font-size: clamp(28px,3.5vw,46px); font-weight: 900; background: linear-gradient(135deg, var(--gold-light), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; margin-bottom: 6px; }
+.prima-word { font-size: clamp(11px,0.9vw,13px); font-weight: 700; letter-spacing: 0.06em; color: rgba(255,255,255,0.8); text-transform: uppercase; margin-bottom: 10px; }
+.prima-desc { font-size: clamp(10px,0.78vw,12px); color: var(--text-sub); line-height: 1.65; }
+@media (max-width: 900px) { .prima-grid { grid-template-columns: repeat(3,1fr); } }
+@media (max-width: 520px) { .prima-grid { grid-template-columns: repeat(2,1fr); } }
+
+/* WILAYAH */
+.wilayah-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: clamp(10px,1.5vw,18px); margin-top: clamp(24px,4vh,40px); }
+.wilayah-card { background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius); padding: clamp(18px,2.5vh,26px) clamp(16px,2vw,24px); display: flex; align-items: center; gap: clamp(12px,1.5vw,20px); backdrop-filter: blur(12px); transition: background 0.25s, transform 0.25s, border-color 0.25s; cursor: default; }
+.wilayah-card:hover { background: var(--glass-hover); transform: translateX(5px); border-color: var(--teal-border); }
+.wilayah-icon { flex-shrink: 0; width: clamp(44px,5vw,58px); height: clamp(44px,5vw,58px); border-radius: 12px; background: var(--teal-pale); border: 1px solid var(--teal-border); display: flex; align-items: center; justify-content: center; }
+.wilayah-icon svg { width: clamp(20px,2.2vw,26px); height: clamp(20px,2.2vw,26px); color: #5ee7e2; }
+.wilayah-name { font-family: 'Playfair Display', serif; font-size: clamp(13px,1.2vw,16px); font-weight: 700; margin-bottom: 4px; }
+.wilayah-type { font-size: clamp(10px,0.78vw,12px); font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: #5ee7e2; opacity: 0.8; }
+@media (max-width: 640px) { .wilayah-grid { grid-template-columns: 1fr; } }
+
+/* CLOSING */
+.closing-wrap { text-align: center; max-width: 720px; margin: 0 auto; }
+.quote-box { background: linear-gradient(135deg, var(--gold-pale), var(--teal-pale)); border: 1px solid var(--gold-border); border-radius: clamp(16px,2.5vw,24px); padding: clamp(28px,5vh,50px) clamp(24px,5vw,50px); margin-bottom: clamp(28px,5vh,44px); position: relative; overflow: hidden; }
+.quote-box::before { content: '"'; position: absolute; top: -20px; left: 20px; font-family: 'Playfair Display', serif; font-size: 180px; color: var(--gold); opacity: 0.06; line-height: 1; pointer-events: none; }
+.quote-text { font-family: 'Playfair Display', serif; font-size: clamp(16px,2vw,24px); font-weight: 700; font-style: italic; line-height: 1.6; color: var(--gold-light); margin-bottom: 14px; }
+.quote-attr { font-size: clamp(11px,0.85vw,13px); color: var(--text-muted); font-weight: 500; letter-spacing: 0.06em; }
+.cta-row { display: flex; gap: clamp(10px,1.5vw,16px); justify-content: center; flex-wrap: wrap; }
+.btn-cta { display: inline-flex; align-items: center; gap: 8px; padding: clamp(11px,1.5vh,14px) clamp(18px,2.5vw,28px); font-size: clamp(12px,0.95vw,14px); font-family: 'Outfit', sans-serif; font-weight: 600; border-radius: 10px; cursor: pointer; border: none; letter-spacing: 0.04em; transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s; }
+.btn-cta:hover { transform: translateY(-3px) scale(1.02); }
+.btn-cta-primary { background: linear-gradient(135deg,#1248b3,#0b3d91); color: #fff; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 5px 20px rgba(0,0,0,0.4); }
+.btn-cta-primary:hover { box-shadow: 0 10px 28px rgba(11,61,145,0.6); }
+.btn-cta-ghost { background: var(--glass); color: var(--white); border: 1px solid var(--gold-border); backdrop-filter: blur(10px); box-shadow: 0 5px 18px rgba(0,0,0,0.3); }
+.btn-cta-ghost:hover { border-color: rgba(201,168,76,0.6); }
+.btn-cta-teal { background: linear-gradient(135deg,rgba(14,165,160,0.3),rgba(14,165,160,0.15)); color: #fff; border: 1px solid var(--teal-border); backdrop-filter: blur(10px); box-shadow: 0 5px 18px rgba(0,0,0,0.3); }
+.btn-cta-teal:hover { border-color: rgba(14,165,160,0.6); box-shadow: 0 10px 26px rgba(14,165,160,0.25); }
+
+/* FOOTER */
+#footer {
+  position: relative; z-index: 10;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: clamp(12px,2vh,18px) clamp(16px,5vw,50px);
+  font-size: clamp(9px,0.75vw,11px); color: var(--text-muted);
+  letter-spacing: 0.06em; backdrop-filter: blur(6px);
+  background: rgba(6,15,46,0.4); flex-wrap: wrap; gap: 8px;
+}
+.footer-brand { font-weight: 600; color: rgba(255,255,255,0.4); }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   LANGUAGE SWITCHER BAR
+============================================================ */
+.lang-switcher-bar {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(6,15,46,0.88);
+  border: 1px solid var(--gold-border);
+  border-radius: 50px;
+  padding: 8px 14px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.1);
+  white-space: nowrap;
+}
+.lang-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-right: 4px;
+}
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.34,1.56,0.64,1);
+  text-decoration: none;
+  color: var(--text-muted);
+  background: transparent;
+}
+.lang-btn:hover {
+  background: var(--glass-hover);
+  color: #fff;
+  border-color: var(--border);
+  transform: translateY(-2px);
+}
+.lang-btn.active {
+  background: linear-gradient(135deg, #1248b3, #0b3d91);
+  color: #fff;
+  border-color: rgba(255,255,255,0.2);
+  box-shadow: 0 4px 16px rgba(11,61,145,0.5);
+}
+.lang-btn .flag { font-size: 14px; }
+.lang-divider {
+  width: 1px;
+  height: 18px;
+  background: var(--border);
+  margin: 0 2px;
+}
+/* Coming soon badge */
+.lang-btn .coming { font-size: 9px; font-weight: 700; letter-spacing: 0.06em; background: var(--teal-pale); border: 1px solid var(--teal-border); color: #5ee7e2; border-radius: 10px; padding: 1px 5px; margin-left: 2px; }
+
+@media (max-width: 480px) {
+  .lang-switcher-bar { bottom: 14px; padding: 7px 10px; gap: 5px; }
+  .lang-btn { padding: 5px 10px; font-size: 11px; }
+  .lang-label { display: none; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg-photo"></div>
+<div class="bg-overlay"></div>
+
+<!-- NAV -->
+<nav id="stickyNav">
+  <div class="nav-brand">
+    <img src="logo-imigrasi.png" alt="Logo" onerror="this.style.display='none'">
+    Kanwil Ditjenim Sulsel
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#history">History</a></li>
+    <li><a href="#duties">Duties</a></li>
+    <li><a href="#vismis">Vision &amp; Mission</a></li>
+    <li><a href="#prima">PRIMA</a></li>
+    <li><a href="#structure">Structure</a></li>
+    <li><a href="#offices">Offices</a></li>
+  </ul>
+  <a href="index.html" class="nav-back">← Home</a>
+</nav>
+
+<!-- PAGE -->
+<div id="page">
+
+  <!-- HERO -->
+  <div id="hero" class="section" style="max-width:100%;opacity:1;transform:none;">
+    <div class="hero-kw">Regional Office · Directorate General of Immigration</div>
+    <h1>Profile of Kanwil<br>Immigration South Sulawesi</h1>
+    <p class="hero-sub">
+      A representative of professional, modern, and adaptive immigration services
+      for the people of South Sulawesi Province.
+    </p>
+    <div class="hero-cta">
+      <a href="#structure" class="btn-hero btn-hero-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Organizational Structure
+      </a>
+      <a href="#duties" class="btn-hero btn-hero-ghost">
+        Duties &amp; Functions
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="stats-row reveal" style="max-width:860px;width:100%;">
+      <div class="stat-card"><span class="stat-num" data-target="6">0</span><span class="stat-label">Technical Units (UPT)</span></div>
+      <div class="stat-card"><span class="stat-num" data-target="5">0</span><span class="stat-label">Immigration Offices</span></div>
+      <div class="stat-card"><span class="stat-num" data-target="1">0</span><span class="stat-label">Detention House</span></div>
+      <div class="stat-card"><span class="stat-num" data-target="2024">0</span><span class="stat-label">Year of Transformation</span></div>
+    </div>
+    <div class="scroll-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      Scroll
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="about" class="section reveal">
+    <div class="two-col">
+      <div class="photo-frame">
+        <img src="kantor.jpg" alt="Kanwil Immigration Office Building" onerror="this.style.display='none'">
+        <div class="photo-placeholder">🏛️</div>
+      </div>
+      <div>
+        <div class="sec-label">About the Office</div>
+        <h2 class="sec-title">South Sulawesi Regional Office<br>of Immigration</h2>
+        <div class="ornament"><div class="orn-line"></div><div class="orn-dot"></div></div>
+        <p class="sec-body" style="margin-bottom:14px;">
+          The South Sulawesi Regional Office of the Directorate General of Immigration is a vertical agency
+          under the Directorate General of Immigration, Ministry of Immigration and Correctional Affairs
+          of the Republic of Indonesia. This agency operates at the provincial level to execute the duties
+          and functions of the Directorate General of Immigration.
+        </p>
+        <p class="sec-body" style="margin-bottom:14px;">
+          This office serves as the controlling and supervisory body for all immigration activities in
+          South Sulawesi, encompassing the management of Technical Operating Units (UPT), supervision
+          of foreign nationals, and the delivery of optimal immigration services to the public.
+        </p>
+        <p class="sec-body">
+          As a <strong style="color:var(--gold-light);">Type A Regional Office</strong>, it oversees
+          6 Technical Operating Units (UPT), comprising 5 Immigration Offices and 1 Immigration
+          Detention House, covering the entire South Sulawesi region.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HISTORY -->
+  <div id="history" class="section reveal">
+    <div class="sec-label">Journey</div>
+    <h2 class="sec-title">History &amp; Transformation</h2>
+    <p class="sec-body">The South Sulawesi Regional Office traces its roots to the institutional development
+      of Indonesian immigration since the early days of independence, continuously evolving alongside
+      growing international mobility and the need for provincial-level coordination.</p>
+
+    <div class="timeline" style="margin-top:36px;max-width:680px;">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">Early Independence</div>
+        <div class="tl-title">Foundation of Indonesian Immigration</div>
+        <div class="tl-desc">Management of international cross-border movement was conducted simply and centralized at several key entry points. The government began establishing immigration units in various regions, including South Sulawesi.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">Development Period</div>
+        <div class="tl-title">Establishment of Regional Offices</div>
+        <div class="tl-desc">The need for provincial-level coordination led to the formation of regional offices, serving as a bridge between the central government and local technical operating units across South Sulawesi.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">Ministry of Law &amp; HR Era</div>
+        <div class="tl-title">Under the Ministry of Law and Human Rights</div>
+        <div class="tl-desc">Immigration functions were placed under the Ministry of Law and Human Rights of the Republic of Indonesia, with the Regional Office coordinating all UPT activities across South Sulawesi.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2024</div>
+        <div class="tl-title">Institutional Transformation</div>
+        <div class="tl-desc">The government established the <strong style="color:var(--gold-light);">Ministry of Immigration and Correctional Affairs</strong>, responding to evolving organizational needs and the growing complexity of immigration tasks across Indonesia.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2025</div>
+        <div class="tl-title">Gradual Implementation</div>
+        <div class="tl-desc">The institutional transformation began its gradual implementation, strengthening the Regional Office's role in carrying out the functions of immigration services, supervision, and law enforcement.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2026 — Present</div>
+        <div class="tl-title">Expansion &amp; New UPT Units</div>
+        <div class="tl-desc">Two new UPT offices began operations: Immigration Office Bone (January 2026) and Immigration Office Bantaeng. The Regional Office now oversees 6 UPTs, providing broader coverage across South Sulawesi.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DUTIES -->
+  <div id="duties" class="section reveal">
+    <div class="sec-label">Position &amp; Duties</div>
+    <h2 class="sec-title">Main Duties and Functions</h2>
+    <p class="sec-body">The Regional Office of the Directorate General of Immigration is tasked with executing
+      specific duties of the Directorate General of Immigration at the provincial level. In its implementation,
+      the Regional Office performs the following 5 main functions:</p>
+
+    <div class="func-grid" style="grid-template-columns:repeat(3,1fr);">
+      <div class="func-card">
+        <div class="func-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="func-title">Operational Coordination</div>
+        <div class="func-desc">Operational coordination of all Technical Operating Units (UPT) within the South Sulawesi region.</div>
+      </div>
+      <div class="func-card">
+        <div class="func-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="func-title">Technical Guidance &amp; Supervision</div>
+        <div class="func-desc">Technical immigration guidance and supervision of all UPT offices under its coordination.</div>
+      </div>
+      <div class="func-card">
+        <div class="func-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="func-title">Control &amp; Evaluation</div>
+        <div class="func-desc">Control and evaluation of immigration task implementation, conducted periodically, measurably, and accountably.</div>
+      </div>
+      <div class="func-card">
+        <div class="func-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="func-title">Program &amp; Budget Formulation</div>
+        <div class="func-desc">Formulating immigration work programs and budgets aligned with national policies and regional needs.</div>
+      </div>
+      <div class="func-card">
+        <div class="func-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="func-title">HR &amp; Administrative Management</div>
+        <div class="func-desc">Managing human resources, personnel administration, and immigration facilities and infrastructure in the region.</div>
+      </div>
+      <div class="func-card" style="border-color:var(--gold-border);background:var(--gold-pale);">
+        <div class="func-icon" style="background:rgba(201,168,76,0.2);border-color:var(--gold-border);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-light)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="func-title" style="color:var(--gold-light);">Legal Basis</div>
+        <div class="func-desc">Regulation of the Minister of Immigration and Correctional Affairs <strong style="color:var(--gold-light);">No. 2 of 2024</strong> on the Organization and Work Procedures of Regional Offices.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VISION MISSION -->
+  <div id="vismis" class="section reveal">
+    <div class="sec-label">Direction &amp; Purpose</div>
+    <h2 class="sec-title">Vision and Mission</h2>
+
+    <div class="vm-section" style="margin-top:clamp(20px,4vh,36px);">
+      <div class="sec-label" style="margin-bottom:12px;">Vision</div>
+      <div class="visi-box">
+        <p class="visi-text">
+          "The Realization of Immigration and Correctional Services that are Modern, Transparent, and Humanist
+          in Creating Security Stability With The Advanced Indonesia towards Golden Indonesia 2045."
+        </p>
+      </div>
+      <div class="sec-label" style="margin-bottom:16px;">Mission</div>
+      <ul class="misi-list">
+        <li class="misi-item"><div class="misi-num">1</div><span>To provide transparent and fair immigration and correctional services that prioritize public satisfaction.</span></li>
+        <li class="misi-item"><div class="misi-num">2</div><span>To build an integrated immigration surveillance system and a training system that is humane, productive, and skill-based.</span></li>
+        <li class="misi-item"><div class="misi-num">3</div><span>To enhance the competence and professionalism of human resources in immigration and correctional services.</span></li>
+        <li class="misi-item"><div class="misi-num">4</div><span>To achieve sound governance in immigration and correctional services through bureaucratic and institutional reform.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PRIMA -->
+  <div id="prima" class="section reveal">
+    <div class="sec-label">Core Values</div>
+    <h2 class="sec-title">Core Value PRIMA</h2>
+    <p class="sec-body">Five core values that serve as the foundation for every immigration officer in delivering the best service to the public.</p>
+
+    <div class="prima-grid">
+      <div class="prima-card" data-letter="P">
+        <div class="prima-letter">P</div>
+        <div class="prima-word">Professional</div>
+        <div class="prima-desc">Carrying out duties and functions professionally, based on expertise and competence, grounded in relevant field knowledge, conducted through a humanist approach that upholds human values.</div>
+      </div>
+      <div class="prima-card" data-letter="R">
+        <div class="prima-letter">R</div>
+        <div class="prima-word">Responsive</div>
+        <div class="prima-desc">Providing services swiftly, accurately, and proactively in meeting public needs, pertaining to both immigration and correctional affairs.</div>
+      </div>
+      <div class="prima-card" data-letter="I">
+        <div class="prima-letter">I</div>
+        <div class="prima-word">Integrity</div>
+        <div class="prima-desc">Upholding the highest standards of integrity in performing duties, reflected through honest conduct in attitude and action, and fairness in law enforcement.</div>
+      </div>
+      <div class="prima-card" data-letter="M">
+        <div class="prima-letter">M</div>
+        <div class="prima-word">Modern</div>
+        <div class="prima-desc">Utilizing modern information systems and technology to support duties and functions, ensuring transparency in the delivery of services to the public.</div>
+      </div>
+      <div class="prima-card" data-letter="A">
+        <div class="prima-letter">A</div>
+        <div class="prima-word">Accountable</div>
+        <div class="prima-desc">Carrying out duties and functions responsibly, in full accordance with applicable laws and regulations of the Republic of Indonesia.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STRUCTURE -->
+  <div id="structure" class="section reveal">
+    <div class="sec-label">Organization</div>
+    <h2 class="sec-title">Organizational Structure</h2>
+    <p class="sec-body">The South Sulawesi Regional Office is a <strong style="color:var(--gold-light);">Type A Regional Office</strong> with an organizational structure designed to support effective coordination, guidance, and supervision of immigration duties.</p>
+
+    <div style="margin-top:clamp(20px,4vh,36px);border-radius:var(--radius);overflow:hidden;border:1px solid var(--gold-border);box-shadow:0 16px 50px rgba(0,0,0,0.5);">
+      <img src="struktur.png" alt="Organizational Structure Kanwil Ditjenim Sulsel"
+        style="width:100%;display:block;"
+        onerror="this.style.display='none';document.getElementById('orgFallback').style.display='flex'">
+    </div>
+
+    <div id="orgFallback" style="display:none;margin-top:clamp(20px,4vh,36px);flex-direction:column;gap:clamp(12px,2vh,18px);">
+      <div style="background:linear-gradient(135deg,#1248b3,#0b3d91);border:1px solid rgba(255,255,255,0.2);border-radius:var(--radius);padding:clamp(14px,2.5vh,22px) clamp(20px,3vw,40px);text-align:center;max-width:340px;margin:0 auto;box-shadow:0 8px 30px rgba(11,61,145,0.5);">
+        <div style="font-size:clamp(9px,0.75vw,11px);font-weight:700;letter-spacing:0.1em;color:var(--gold-light);text-transform:uppercase;margin-bottom:4px;">Head of Regional Office</div>
+        <div style="font-family:'Playfair Display',serif;font-size:clamp(14px,1.4vw,18px);font-weight:700;">Friece Sumolang</div>
+      </div>
+      <div style="background:var(--glass);border:1px solid var(--gold-border);border-radius:var(--radius);padding:clamp(12px,2vh,18px) clamp(16px,2vw,24px);text-align:center;max-width:300px;margin:0 auto;">
+        <div style="font-size:clamp(9px,0.75vw,11px);font-weight:700;letter-spacing:0.08em;color:var(--gold-light);text-transform:uppercase;margin-bottom:4px;">Head of Administrative &amp; General Division</div>
+        <div style="font-family:'Playfair Display',serif;font-size:clamp(13px,1.2vw,16px);font-weight:700;">Perdemuan Sebayang</div>
+      </div>
+      <div style="display:flex;gap:clamp(8px,1.2vw,14px);flex-wrap:wrap;justify-content:center;">
+        <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(12px,1.8vh,18px);text-align:center;flex:1;min-width:180px;max-width:220px;">
+          <div style="font-size:clamp(9px,0.72vw,11px);font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:4px;">Intelligence &amp; Internal Compliance</div>
+          <div style="font-family:'Playfair Display',serif;font-size:clamp(12px,1.1vw,14px);font-weight:700;">Andi Ruswan Said</div>
+        </div>
+        <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(12px,1.8vh,18px);text-align:center;flex:1;min-width:180px;max-width:220px;">
+          <div style="font-size:clamp(9px,0.72vw,11px);font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:4px;">Supervision &amp; Enforcement</div>
+          <div style="font-family:'Playfair Display',serif;font-size:clamp(12px,1.1vw,14px);font-weight:700;">Sahroni</div>
+        </div>
+        <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(12px,1.8vh,18px);text-align:center;flex:1;min-width:180px;max-width:220px;">
+          <div style="font-size:clamp(9px,0.72vw,11px);font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:4px;">Travel Documents &amp; Stay Permits</div>
+          <div style="font-family:'Playfair Display',serif;font-size:clamp(12px,1.1vw,14px);font-weight:700;">Imam Santoso</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:clamp(16px,3vh,28px);background:var(--glass);border:1px solid var(--border);border-radius:var(--radius);padding:clamp(14px,2.5vh,22px) clamp(16px,2.5vw,28px);backdrop-filter:blur(10px);">
+      <div class="sec-label" style="margin-bottom:12px;">Units Within Structure</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;">
+        <div style="display:flex;align-items:center;gap:8px;font-size:clamp(11px,0.88vw,13px);color:var(--text-sub);"><div style="width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;"></div>Head of Regional Office</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:clamp(11px,0.88vw,13px);color:var(--text-sub);"><div style="width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;"></div>Division of Administrative and General Affairs</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:clamp(11px,0.88vw,13px);color:var(--text-sub);"><div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div>Dept. of Travel Documents, Stay Permits &amp; Immigration Status</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:clamp(11px,0.88vw,13px);color:var(--text-sub);"><div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div>Dept. of Immigration Supervision and Enforcement</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:clamp(11px,0.88vw,13px);color:var(--text-sub);"><div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div>Dept. of Intelligence and Internal Compliance</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:clamp(11px,0.88vw,13px);color:var(--text-sub);"><div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.3);flex-shrink:0;"></div>Functional Position Groups and Administrative Positions</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OFFICES -->
+  <div id="offices" class="section reveal">
+    <div class="sec-label">Coverage</div>
+    <h2 class="sec-title">Work Area &amp; Technical Operating Units</h2>
+    <p class="sec-body">The South Sulawesi Regional Office oversees <strong style="color:var(--gold-light);">6 Technical Operating Units (UPT)</strong>
+      spread across South Sulawesi. Classification is determined based on workload, complexity of duties, and coverage area of each office.</p>
+
+    <div class="wilayah-grid" style="margin-top:clamp(20px,4vh,36px);">
+      <div class="wilayah-card">
+        <div class="wilayah-icon" style="background:rgba(201,168,76,0.15);border-color:var(--gold-border);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-light)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div class="wilayah-name">Class I Special Immigration Office TPI Makassar</div>
+          <div class="wilayah-type">Class I Special · TPI</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);margin-top:4px;">Head of Office: Abdi Widodo Subagio</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);">Makassar City, Gowa Regency, Maros Regency</div>
+        </div>
+      </div>
+      <div class="wilayah-card">
+        <div class="wilayah-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div class="wilayah-name">Class II Immigration Office TPI Parepare</div>
+          <div class="wilayah-type">Class II · TPI</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);margin-top:4px;">Head of Office: Ade Yanuar Ikbal, S.H., M.H.</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);">Parepare City, Pinrang, Barru, Sidrap Regencies</div>
+        </div>
+      </div>
+      <div class="wilayah-card">
+        <div class="wilayah-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div class="wilayah-name">Class II Non-TPI Immigration Office Palopo</div>
+          <div class="wilayah-type">Class II · Non-TPI</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);margin-top:4px;">Head of Office: Yogie Kashogi, A.Md.Im., S.H., M.H.</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);">Palopo City, Toraja Regencies, all Luwu Regencies</div>
+        </div>
+      </div>
+      <div class="wilayah-card" style="border-color:rgba(14,165,160,0.35);position:relative;overflow:hidden;">
+        <div style="position:absolute;top:6px;right:8px;font-size:9px;font-weight:700;letter-spacing:0.08em;color:var(--teal);background:var(--teal-pale);border:1px solid var(--teal-border);border-radius:20px;padding:2px 8px;">NEW 2026</div>
+        <div class="wilayah-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div class="wilayah-name">Class III Non-TPI Immigration Office Bone</div>
+          <div class="wilayah-type">Class III · Non-TPI</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);margin-top:4px;">Head of Office: Andi Rezka Putra Arupalaka</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);">Bone, Sinjai, Wajo, Soppeng Regencies</div>
+        </div>
+      </div>
+      <div class="wilayah-card" style="border-color:rgba(14,165,160,0.35);position:relative;overflow:hidden;">
+        <div style="position:absolute;top:6px;right:8px;font-size:9px;font-weight:700;letter-spacing:0.08em;color:var(--teal);background:var(--teal-pale);border:1px solid var(--teal-border);border-radius:20px;padding:2px 8px;">NEW</div>
+        <div class="wilayah-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div class="wilayah-name">Class III Non-TPI Immigration Office Bantaeng</div>
+          <div class="wilayah-type">Class III · Non-TPI</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);margin-top:4px;">Head of Office: Nur Arifandi Azis</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);">Bantaeng, Bulukumba, Jeneponto, Selayar Islands</div>
+        </div>
+      </div>
+      <div class="wilayah-card" style="border-color:rgba(239,68,68,0.3);">
+        <div class="wilayah-icon" style="background:rgba(239,68,68,0.10);border-color:rgba(239,68,68,0.3);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div class="wilayah-name">Immigration Detention House of Makassar</div>
+          <div class="wilayah-type" style="color:#f87171;">Detention House · Makassar</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);margin-top:4px;">Head of Office: Rudy Prasetyo</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);">Supervision &amp; temporary accommodation of foreign nationals</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMMIGRATION SERVICES -->
+  <div id="services" class="section reveal">
+    <div class="sec-label">Public Services</div>
+    <h2 class="sec-title">Immigration Service Types</h2>
+    <p class="sec-body">The South Sulawesi Regional Office through its UPTs provides various immigration services for both Indonesian citizens and foreign nationals.</p>
+
+    <div class="func-grid" style="margin-top:clamp(20px,4vh,36px);">
+      <div class="func-card">
+        <div class="func-icon" style="background:rgba(201,168,76,0.15);border-color:var(--gold-border);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-light)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <div class="func-title">Passport</div>
+        <div class="func-desc">An official document issued to Indonesian citizens as identification for international travel. Issued through data verification and administrative procedures.</div>
+      </div>
+      <div class="func-card">
+        <div class="func-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div class="func-title">Visa</div>
+        <div class="func-desc">Entry permit for foreign nationals into Indonesia. Includes visit visas, limited stay visas, and special-purpose visas issued based on purpose and duration of stay.</div>
+      </div>
+      <div class="func-card">
+        <div class="func-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="23" y1="11" x2="17" y2="11"/><line x1="20" y1="8" x2="20" y2="14"/></svg>
+        </div>
+        <div class="func-title">Stay Permit</div>
+        <div class="func-desc">Legal authorization for foreign nationals to reside in Indonesia. Includes visit stay permit, limited stay permit (ITAS/e-KITAS), and permanent stay permit (ITAP).</div>
+      </div>
+      <div class="func-card">
+        <div class="func-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="func-title">Other Services</div>
+        <div class="func-desc">Immigration checks at airports and seaports, monitoring of foreign nationals, administrative actions including deportation, and ongoing development of digital-based services.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMMIGRATION TERMS -->
+  <div id="terms" class="section reveal">
+    <div class="sec-label">Reference</div>
+    <h2 class="sec-title">Immigration Terms</h2>
+    <p class="sec-body">Key immigration terms the public should know when dealing with immigration services.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(8px,1.2vw,14px);margin-top:clamp(20px,4vh,36px);">
+      <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(14px,2vh,20px) clamp(14px,1.8vw,20px);backdrop-filter:blur(10px);transition:background 0.22s;" onmouseover="this.style.background='var(--glass-hover)'" onmouseout="this.style.background='var(--glass)'">
+        <div style="font-size:clamp(11px,0.9vw,13px);font-weight:700;color:var(--gold-light);margin-bottom:5px;">TPI — Immigration Checkpoint</div>
+        <div style="font-size:clamp(11px,0.85vw,13px);color:var(--text-sub);">Immigration offices that provide direct entry and exit check services, similar to border crossing points like airports, seaports, and land borders.</div>
+      </div>
+      <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(14px,2vh,20px) clamp(14px,1.8vw,20px);backdrop-filter:blur(10px);transition:background 0.22s;" onmouseover="this.style.background='var(--glass-hover)'" onmouseout="this.style.background='var(--glass)'">
+        <div style="font-size:clamp(11px,0.9vw,13px);font-weight:700;color:var(--gold-light);margin-bottom:5px;">Non-TPI</div>
+        <div style="font-size:clamp(11px,0.85vw,13px);color:var(--text-sub);">Immigration offices that do not provide direct entry and exit inspection services.</div>
+      </div>
+      <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(14px,2vh,20px) clamp(14px,1.8vw,20px);backdrop-filter:blur(10px);transition:background 0.22s;" onmouseover="this.style.background='var(--glass-hover)'" onmouseout="this.style.background='var(--glass)'">
+        <div style="font-size:clamp(11px,0.9vw,13px);font-weight:700;color:var(--gold-light);margin-bottom:5px;">e-KITAS</div>
+        <div style="font-size:clamp(11px,0.85vw,13px);color:var(--text-sub);">Electronic Limited Stay Permit Card for foreign nationals residing in Indonesia.</div>
+      </div>
+      <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(14px,2vh,20px) clamp(14px,1.8vw,20px);backdrop-filter:blur(10px);transition:background 0.22s;" onmouseover="this.style.background='var(--glass-hover)'" onmouseout="this.style.background='var(--glass)'">
+        <div style="font-size:clamp(11px,0.9vw,13px);font-weight:700;color:var(--gold-light);margin-bottom:5px;">Overstay</div>
+        <div style="font-size:clamp(11px,0.85vw,13px);color:var(--text-sub);">Staying beyond the permitted duration of stay granted by immigration authorities.</div>
+      </div>
+      <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(14px,2vh,20px) clamp(14px,1.8vw,20px);backdrop-filter:blur(10px);transition:background 0.22s;" onmouseover="this.style.background='var(--glass-hover)'" onmouseout="this.style.background='var(--glass)'">
+        <div style="font-size:clamp(11px,0.9vw,13px);font-weight:700;color:var(--gold-light);margin-bottom:5px;">Entry Ban / Exit Ban</div>
+        <div style="font-size:clamp(11px,0.85vw,13px);color:var(--text-sub);">A prohibition from entering or leaving a country for a certain period due to deportation, expulsion, or serious immigration violations.</div>
+      </div>
+      <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(14px,2vh,20px) clamp(14px,1.8vw,20px);backdrop-filter:blur(10px);transition:background 0.22s;" onmouseover="this.style.background='var(--glass-hover)'" onmouseout="this.style.background='var(--glass)'">
+        <div style="font-size:clamp(11px,0.9vw,13px);font-weight:700;color:var(--gold-light);margin-bottom:5px;">Detainee</div>
+        <div style="font-size:clamp(11px,0.85vw,13px);color:var(--text-sub);">A foreign national placed in an Immigration Detention House based on a detention decision issued by an Immigration Officer.</div>
+      </div>
+      <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(14px,2vh,20px) clamp(14px,1.8vw,20px);backdrop-filter:blur(10px);transition:background 0.22s;" onmouseover="this.style.background='var(--glass-hover)'" onmouseout="this.style.background='var(--glass)'">
+        <div style="font-size:clamp(11px,0.9vw,13px);font-weight:700;color:var(--gold-light);margin-bottom:5px;">Entry / Exit Stamp</div>
+        <div style="font-size:clamp(11px,0.85vw,13px);color:var(--text-sub);">A stamp placed on a passport indicating the date and place of entry into or exit from a country.</div>
+      </div>
+      <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(14px,2vh,20px) clamp(14px,1.8vw,20px);backdrop-filter:blur(10px);transition:background 0.22s;" onmouseover="this.style.background='var(--glass-hover)'" onmouseout="this.style.background='var(--glass)'">
+        <div style="font-size:clamp(11px,0.9vw,13px);font-weight:700;color:var(--gold-light);margin-bottom:5px;">Deportation</div>
+        <div style="font-size:clamp(11px,0.85vw,13px);color:var(--text-sub);">A forced removal of a foreign national from the territory of Indonesia in accordance with immigration laws.</div>
+      </div>
+      <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(14px,2vh,20px) clamp(14px,1.8vw,20px);backdrop-filter:blur(10px);transition:background 0.22s;" onmouseover="this.style.background='var(--glass-hover)'" onmouseout="this.style.background='var(--glass)'">
+        <div style="font-size:clamp(11px,0.9vw,13px);font-weight:700;color:var(--gold-light);margin-bottom:5px;">Border Crossing Point</div>
+        <div style="font-size:clamp(11px,0.85vw,13px);color:var(--text-sub);">Official entry and exit points (airports, seaports, land borders) where immigration inspections are conducted.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div id="closing" class="section reveal" style="max-width:860px;">
+    <div class="closing-wrap">
+      <div class="sec-label" style="justify-content:center;">Closing</div>
+      <h2 class="sec-title">Serving with Heart</h2>
+
+      <div class="quote-box">
+        <p class="quote-text">
+          "Delivering professional, transparent, and humanist immigration services for the community."
+        </p>
+        <p class="quote-attr">— Regional Office of the Directorate General of Immigration, South Sulawesi</p>
+      </div>
+
+      <div class="cta-row">
+        <a href="chatbot.html" class="btn-cta btn-cta-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Immigration Services
+        </a>
+        <a href="mailto:kanwil.imigrasi.sulsel@imigrasi.go.id" class="btn-cta btn-cta-ghost">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Contact Us
+        </a>
+        <a href="#" class="btn-cta btn-cta-teal">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Public Complaint
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <span class="footer-brand">© Regional Office of the Directorate General of Immigration, South Sulawesi</span>
+  <span id="footerYear"></span>
+</footer>
+
+<!-- ============================================================
+     LANGUAGE SWITCHER (FIXED BOTTOM)
+============================================================ -->
+<div class="lang-switcher-bar">
+  <span class="lang-label">Language</span>
+
+  <!-- Indonesian -->
+  <a href="profil.html" class="lang-btn">
+    <span class="flag">🇮🇩</span>
+    Indonesia
+  </a>
+
+  <div class="lang-divider"></div>
+
+  <!-- English — currently active -->
+  <a href="profil-en.html" class="lang-btn active">
+    <span class="flag">🇬🇧</span>
+    English
+  </a>
+
+  <div class="lang-divider"></div>
+
+  <!-- Mandarin -->
+  <a href="profil-cn.html" class="lang-btn" title="Mandarin version">
+    <span class="flag">🇨🇳</span>
+    中文
+  </a>
+</div>
+
+<script>
+/* SCROLL REVEAL */
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+revealEls.forEach(el => observer.observe(el));
+
+/* NAV ACTIVE */
+const sections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const navObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const link = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => navObserver.observe(s));
+
+/* COUNTER */
+const counters = document.querySelectorAll('.stat-num[data-target]');
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const target = +el.dataset.target;
+    let current = 0;
+    const step = Math.ceil(target / 30);
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.textContent = current;
+      if (current >= target) clearInterval(timer);
+    }, 40);
+    counterObs.unobserve(el);
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => counterObs.observe(c));
+
+/* FOOTER YEAR */
+document.getElementById('footerYear').textContent =
+  new Date().getFullYear() + ' — Public Digital Information System';
+</script>
+
+</body>
+</html>

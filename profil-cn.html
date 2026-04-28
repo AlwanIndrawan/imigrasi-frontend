@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>简介 — 南苏拉威西省移民总局区域办公室</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --navy:         #060f2e;
+  --blue:         #0b3d91;
+  --blue-mid:     #1248b3;
+  --gold:         #c9a84c;
+  --gold-light:   #e8c97a;
+  --gold-pale:    rgba(201,168,76,0.12);
+  --gold-border:  rgba(201,168,76,0.30);
+  --teal:         #0ea5a0;
+  --teal-pale:    rgba(14,165,160,0.12);
+  --teal-border:  rgba(14,165,160,0.30);
+  --white:        #f0f4ff;
+  --glass:        rgba(255,255,255,0.055);
+  --glass-hover:  rgba(255,255,255,0.10);
+  --border:       rgba(255,255,255,0.09);
+  --text-muted:   rgba(255,255,255,0.50);
+  --text-sub:     rgba(255,255,255,0.72);
+  --radius:       16px;
+  --radius-sm:    10px;
+  --section-gap:  clamp(60px,10vh,110px);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Outfit', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  overflow-x: hidden;
+  line-height: 1.8;
+}
+img { max-width: 100%; display: block; }
+a   { text-decoration: none; color: inherit; }
+
+.bg-photo {
+  position: fixed; inset: 0;
+  background: url('bg.jpeg') center/cover no-repeat;
+  z-index: 0;
+}
+.bg-overlay {
+  position: fixed; inset: 0;
+  background: linear-gradient(160deg,
+    rgba(4,10,32,0.96) 0%,
+    rgba(7,31,79,0.92) 50%,
+    rgba(5,45,70,0.94) 100%);
+  z-index: 1;
+}
+
+/* NAV */
+#stickyNav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 clamp(16px,4vw,50px);
+  height: clamp(52px,7vh,68px);
+  background: rgba(6,15,46,0.82);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-brand {
+  display: flex; align-items: center; gap: 10px;
+  font-size: clamp(11px,0.9vw,13px); font-weight: 600;
+  letter-spacing: 0.02em; color: rgba(255,255,255,0.7); white-space: nowrap;
+}
+.nav-brand img { width: clamp(26px,3vw,36px); height: clamp(26px,3vw,36px); object-fit: contain; }
+.nav-links { display: flex; gap: clamp(4px,1.5vw,24px); list-style: none; }
+.nav-links a {
+  font-size: clamp(10px,0.8vw,12px); font-weight: 600;
+  letter-spacing: 0.04em; color: var(--text-muted);
+  padding: 4px 2px; border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s; white-space: nowrap;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--gold-light); border-color: var(--gold); }
+.nav-back {
+  font-size: clamp(10px,0.8vw,12px); font-weight: 600;
+  color: var(--text-muted); padding: 6px 14px;
+  border: 1px solid var(--border); border-radius: 30px;
+  transition: background 0.2s, color 0.2s; white-space: nowrap;
+}
+.nav-back:hover { background: var(--glass-hover); color: #fff; }
+@media (max-width: 768px) { .nav-links { display: none; } }
+
+/* PAGE */
+#page { position: relative; z-index: 10; padding-top: clamp(52px,7vh,68px); }
+
+/* SECTION */
+.section {
+  width: 100%; max-width: 1140px;
+  margin: 0 auto;
+  padding: var(--section-gap) clamp(16px,5vw,50px);
+  opacity: 0; transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.section.visible { opacity: 1; transform: translateY(0); }
+
+.sec-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: clamp(9px,0.75vw,11px); font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gold-light); margin-bottom: clamp(10px,2vh,16px); opacity: 0.8;
+}
+.sec-label::before { content: ''; display: block; width: 20px; height: 2px; background: var(--gold); border-radius: 2px; }
+.sec-title {
+  font-family: 'Playfair Display', 'PingFang SC', serif;
+  font-size: clamp(22px,3.5vw,42px); font-weight: 900;
+  line-height: 1.3; letter-spacing: 0.01em;
+  margin-bottom: clamp(12px,2.5vh,20px);
+  background: linear-gradient(135deg, #fff 0%, #d4e4ff 60%, var(--gold-light) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.sec-body { font-size: clamp(13px,1.1vw,16px); color: var(--text-sub); max-width: 680px; line-height: 1.9; }
+.ornament { display: flex; align-items: center; gap: 10px; margin: clamp(16px,3vh,28px) 0; }
+.orn-line { height: 1px; background: linear-gradient(to right, var(--gold), transparent); flex: 1; opacity: 0.25; }
+.orn-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); opacity: 0.6; }
+
+/* HERO */
+#hero {
+  min-height: 100dvh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  max-width: 860px;
+  padding: clamp(80px,12vh,120px) clamp(16px,5vw,40px) clamp(60px,8vh,80px);
+  animation: heroIn 1s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes heroIn { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
+.hero-kw {
+  font-size: clamp(10px,0.85vw,13px); font-weight: 700;
+  letter-spacing: 0.12em; color: var(--gold-light); opacity: 0.75;
+  margin-bottom: clamp(14px,3vh,24px);
+}
+#hero h1 {
+  font-family: 'Playfair Display', 'PingFang SC', serif;
+  font-size: clamp(26px,5.5vw,66px); font-weight: 900; line-height: 1.2;
+  margin-bottom: clamp(16px,3vh,26px);
+  background: linear-gradient(135deg, #fff 0%, #cce0ff 50%, var(--gold-light) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-sub { font-size: clamp(13px,1.3vw,17px); color: var(--text-sub); max-width: 580px; margin: 0 auto clamp(28px,5vh,44px); line-height: 1.9; }
+.hero-cta { display: flex; gap: clamp(10px,1.5vw,16px); justify-content: center; flex-wrap: wrap; }
+.btn-hero {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: clamp(12px,1.5vh,15px) clamp(20px,2.5vw,30px);
+  font-size: clamp(12px,1vw,14px); font-family: 'Outfit', sans-serif;
+  font-weight: 600; border-radius: 12px; cursor: pointer; border: none;
+  transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s;
+  letter-spacing: 0.02em;
+}
+.btn-hero:hover { transform: translateY(-3px) scale(1.02); }
+.btn-hero-primary { background: linear-gradient(135deg,#1248b3,#0b3d91); color: #fff; border: 1px solid rgba(255,255,255,0.18); box-shadow: 0 6px 24px rgba(0,0,0,0.4); }
+.btn-hero-primary:hover { box-shadow: 0 12px 32px rgba(11,61,145,0.65); }
+.btn-hero-ghost { background: var(--glass); color: var(--white); border: 1px solid var(--gold-border); backdrop-filter: blur(10px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+.btn-hero-ghost:hover { border-color: rgba(201,168,76,0.6); }
+.scroll-hint {
+  position: absolute; bottom: clamp(20px,4vh,36px); left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  color: var(--text-muted); font-size: 10px; letter-spacing: 0.08em;
+  animation: scrollBob 2s ease-in-out infinite;
+}
+.scroll-hint svg { width: 18px; height: 18px; opacity: 0.5; }
+@keyframes scrollBob { 0%,100% { transform:translateX(-50%) translateY(0); } 50% { transform:translateX(-50%) translateY(7px); } }
+
+/* STATS */
+.stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: clamp(10px,1.5vw,18px); margin-top: clamp(30px,5vh,50px); }
+.stat-card { background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius); padding: clamp(16px,2.5vh,26px) clamp(14px,2vw,24px); text-align: center; backdrop-filter: blur(12px); transition: background 0.25s, transform 0.25s; }
+.stat-card:hover { background: var(--glass-hover); transform: translateY(-4px); }
+.stat-num { font-family: 'Playfair Display', serif; font-size: clamp(28px,3.5vw,48px); font-weight: 900; line-height: 1; color: var(--gold-light); display: block; }
+.stat-label { font-size: clamp(10px,0.8vw,12px); font-weight: 600; letter-spacing: 0.04em; color: var(--text-muted); margin-top: 6px; }
+@media (max-width:640px) { .stats-row { grid-template-columns: repeat(2,1fr); } }
+
+/* TWO COL */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px,4vw,60px); align-items: center; }
+.photo-frame { position: relative; border-radius: clamp(14px,2vw,22px); overflow: hidden; aspect-ratio: 4/3; background: var(--glass); border: 1px solid var(--border); }
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; }
+.photo-frame::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(14,165,160,0.15), rgba(201,168,76,0.08)); pointer-events: none; }
+.photo-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: clamp(40px,6vw,80px); opacity: 0.15; }
+@media (max-width:768px) { .two-col { grid-template-columns: 1fr; } }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: clamp(28px,4vw,50px); margin-top: clamp(24px,4vh,40px); }
+.timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--gold), var(--teal), transparent); opacity: 0.35; }
+.tl-item { position: relative; padding-bottom: clamp(24px,4vh,38px); }
+.tl-item:last-child { padding-bottom: 0; }
+.tl-dot { position: absolute; left: calc(-1 * clamp(28px,4vw,50px) - 6px); top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--gold); border: 2px solid var(--navy); box-shadow: 0 0 10px rgba(201,168,76,0.5); }
+.tl-item:nth-child(even) .tl-dot { background: var(--teal); box-shadow: 0 0 10px rgba(14,165,160,0.5); }
+.tl-year { font-size: clamp(10px,0.8vw,12px); font-weight: 700; letter-spacing: 0.08em; color: var(--gold-light); margin-bottom: 4px; }
+.tl-item:nth-child(even) .tl-year { color: #5ee7e2; }
+.tl-title { font-family: 'Playfair Display', serif; font-size: clamp(14px,1.4vw,18px); font-weight: 700; margin-bottom: 6px; }
+.tl-desc { font-size: clamp(12px,0.9vw,14px); color: var(--text-sub); line-height: 1.8; }
+
+/* FUNC GRID */
+.func-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: clamp(10px,1.5vw,18px); margin-top: clamp(24px,4vh,40px); }
+.func-card { background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius); padding: clamp(18px,2.5vh,28px) clamp(14px,2vw,22px); text-align: center; backdrop-filter: blur(12px); transition: background 0.25s, transform 0.25s, border-color 0.25s; cursor: default; }
+.func-card:hover { background: var(--glass-hover); transform: translateY(-5px); border-color: var(--gold-border); }
+.func-icon { width: clamp(42px,5vw,58px); height: clamp(42px,5vw,58px); border-radius: 14px; background: var(--gold-pale); border: 1px solid var(--gold-border); display: flex; align-items: center; justify-content: center; margin: 0 auto clamp(12px,2vh,18px); }
+.func-icon svg { width: clamp(20px,2.2vw,26px); height: clamp(20px,2.2vw,26px); color: var(--gold-light); }
+.func-title { font-family: 'Playfair Display', serif; font-size: clamp(13px,1.2vw,16px); font-weight: 700; margin-bottom: 8px; }
+.func-desc { font-size: clamp(11px,0.85vw,13px); color: var(--text-sub); line-height: 1.8; }
+@media (max-width:900px) { .func-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width:480px) { .func-grid { grid-template-columns: 1fr; } }
+
+/* VISI MISI */
+.vm-section { background: linear-gradient(135deg, rgba(11,61,145,0.18), rgba(14,165,160,0.08)); border: 1px solid var(--border); border-radius: clamp(16px,2.5vw,24px); padding: clamp(28px,5vh,50px) clamp(20px,4vw,50px); backdrop-filter: blur(14px); }
+.visi-box { background: var(--gold-pale); border: 1px solid var(--gold-border); border-radius: var(--radius); padding: clamp(18px,3vh,28px) clamp(18px,3vw,30px); margin-bottom: clamp(20px,4vh,34px); position: relative; overflow: hidden; }
+.visi-box::before { content: '"'; position: absolute; top: -10px; left: 14px; font-family: 'Playfair Display', serif; font-size: 120px; color: var(--gold); opacity: 0.08; line-height: 1; pointer-events: none; }
+.visi-text { font-family: 'Playfair Display', 'PingFang SC', serif; font-size: clamp(14px,1.4vw,18px); font-weight: 700; font-style: italic; line-height: 1.75; color: var(--gold-light); }
+.misi-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.misi-item { display: flex; align-items: flex-start; gap: 12px; font-size: clamp(12px,1vw,15px); color: var(--text-sub); line-height: 1.8; }
+.misi-num { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: var(--teal-pale); border: 1px solid var(--teal-border); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #5ee7e2; margin-top: 2px; }
+
+/* PRIMA */
+.prima-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: clamp(8px,1.2vw,14px); margin-top: clamp(24px,4vh,40px); }
+.prima-card { background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius); padding: clamp(16px,2.5vh,26px) clamp(12px,1.5vw,18px); text-align: center; backdrop-filter: blur(12px); transition: background 0.25s, transform 0.25s, border-color 0.25s, box-shadow 0.25s; cursor: default; position: relative; overflow: hidden; }
+.prima-card::before { content: attr(data-letter); position: absolute; bottom: -10px; right: 4px; font-family: 'Playfair Display', serif; font-size: 80px; font-weight: 900; color: var(--gold); opacity: 0.04; line-height: 1; pointer-events: none; }
+.prima-card:hover { background: var(--glass-hover); transform: translateY(-6px); border-color: var(--gold-border); box-shadow: 0 12px 30px rgba(0,0,0,0.35); }
+.prima-letter { font-family: 'Playfair Display', serif; font-size: clamp(28px,3.5vw,46px); font-weight: 900; background: linear-gradient(135deg, var(--gold-light), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; margin-bottom: 6px; }
+.prima-word { font-size: clamp(10px,0.85vw,12px); font-weight: 700; letter-spacing: 0.02em; color: rgba(255,255,255,0.8); margin-bottom: 10px; }
+.prima-zh { font-size: clamp(13px,1.1vw,15px); font-weight: 700; color: var(--gold-light); margin-bottom: 6px; }
+.prima-desc { font-size: clamp(10px,0.78vw,12px); color: var(--text-sub); line-height: 1.7; }
+@media (max-width:900px) { .prima-grid { grid-template-columns: repeat(3,1fr); } }
+@media (max-width:520px) { .prima-grid { grid-template-columns: repeat(2,1fr); } }
+
+/* WILAYAH */
+.wilayah-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: clamp(10px,1.5vw,18px); margin-top: clamp(24px,4vh,40px); }
+.wilayah-card { background: var(--glass); border: 1px solid var(--border); border-radius: var(--radius); padding: clamp(18px,2.5vh,26px) clamp(16px,2vw,24px); display: flex; align-items: center; gap: clamp(12px,1.5vw,20px); backdrop-filter: blur(12px); transition: background 0.25s, transform 0.25s, border-color 0.25s; cursor: default; }
+.wilayah-card:hover { background: var(--glass-hover); transform: translateX(5px); border-color: var(--teal-border); }
+.wilayah-icon { flex-shrink: 0; width: clamp(44px,5vw,58px); height: clamp(44px,5vw,58px); border-radius: 12px; background: var(--teal-pale); border: 1px solid var(--teal-border); display: flex; align-items: center; justify-content: center; }
+.wilayah-icon svg { width: clamp(20px,2.2vw,26px); height: clamp(20px,2.2vw,26px); color: #5ee7e2; }
+.wilayah-name { font-family: 'Playfair Display', serif; font-size: clamp(13px,1.2vw,16px); font-weight: 700; margin-bottom: 4px; }
+.wilayah-type { font-size: clamp(10px,0.78vw,12px); font-weight: 600; letter-spacing: 0.04em; color: #5ee7e2; opacity: 0.8; }
+@media (max-width:640px) { .wilayah-grid { grid-template-columns: 1fr; } }
+
+/* CLOSING */
+.closing-wrap { text-align: center; max-width: 720px; margin: 0 auto; }
+.quote-box { background: linear-gradient(135deg, var(--gold-pale), var(--teal-pale)); border: 1px solid var(--gold-border); border-radius: clamp(16px,2.5vw,24px); padding: clamp(28px,5vh,50px) clamp(24px,5vw,50px); margin-bottom: clamp(28px,5vh,44px); position: relative; overflow: hidden; }
+.quote-box::before { content: '"'; position: absolute; top: -20px; left: 20px; font-family: 'Playfair Display', serif; font-size: 180px; color: var(--gold); opacity: 0.06; line-height: 1; pointer-events: none; }
+.quote-text { font-family: 'Playfair Display', 'PingFang SC', serif; font-size: clamp(15px,1.8vw,22px); font-weight: 700; font-style: italic; line-height: 1.7; color: var(--gold-light); margin-bottom: 14px; }
+.quote-attr { font-size: clamp(11px,0.85vw,13px); color: var(--text-muted); font-weight: 500; letter-spacing: 0.02em; }
+.cta-row { display: flex; gap: clamp(10px,1.5vw,16px); justify-content: center; flex-wrap: wrap; }
+.btn-cta { display: inline-flex; align-items: center; gap: 8px; padding: clamp(11px,1.5vh,14px) clamp(18px,2.5vw,28px); font-size: clamp(12px,0.95vw,14px); font-family: 'Outfit', sans-serif; font-weight: 600; border-radius: 10px; cursor: pointer; border: none; letter-spacing: 0.02em; transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s; }
+.btn-cta:hover { transform: translateY(-3px) scale(1.02); }
+.btn-cta-primary { background: linear-gradient(135deg,#1248b3,#0b3d91); color: #fff; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 5px 20px rgba(0,0,0,0.4); }
+.btn-cta-primary:hover { box-shadow: 0 10px 28px rgba(11,61,145,0.6); }
+.btn-cta-ghost { background: var(--glass); color: var(--white); border: 1px solid var(--gold-border); backdrop-filter: blur(10px); box-shadow: 0 5px 18px rgba(0,0,0,0.3); }
+.btn-cta-ghost:hover { border-color: rgba(201,168,76,0.6); }
+.btn-cta-teal { background: linear-gradient(135deg,rgba(14,165,160,0.3),rgba(14,165,160,0.15)); color: #fff; border: 1px solid var(--teal-border); backdrop-filter: blur(10px); }
+.btn-cta-teal:hover { border-color: rgba(14,165,160,0.6); }
+
+/* FOOTER */
+#footer {
+  position: relative; z-index: 10;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: clamp(12px,2vh,18px) clamp(16px,5vw,50px);
+  font-size: clamp(9px,0.75vw,11px); color: var(--text-muted);
+  letter-spacing: 0.04em; backdrop-filter: blur(6px);
+  background: rgba(6,15,46,0.4); flex-wrap: wrap; gap: 8px;
+}
+.footer-brand { font-weight: 600; color: rgba(255,255,255,0.4); }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* LANGUAGE SWITCHER */
+.lang-switcher-bar {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  z-index: 200; display: flex; align-items: center; gap: 8px;
+  background: rgba(6,15,46,0.88); border: 1px solid var(--gold-border);
+  border-radius: 50px; padding: 8px 14px; backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.1);
+  white-space: nowrap;
+}
+.lang-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-right: 4px; }
+.lang-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; font-size: 12px; font-family: 'Outfit', sans-serif;
+  font-weight: 600; letter-spacing: 0.03em; border-radius: 30px;
+  border: 1px solid transparent; cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.34,1.56,0.64,1);
+  text-decoration: none; color: var(--text-muted); background: transparent;
+}
+.lang-btn:hover { background: var(--glass-hover); color: #fff; border-color: var(--border); transform: translateY(-2px); }
+.lang-btn.active { background: linear-gradient(135deg,#1248b3,#0b3d91); color: #fff; border-color: rgba(255,255,255,0.2); box-shadow: 0 4px 16px rgba(11,61,145,0.5); }
+.lang-btn .flag { font-size: 14px; }
+.lang-divider { width: 1px; height: 18px; background: var(--border); margin: 0 2px; }
+@media (max-width:480px) { .lang-switcher-bar { bottom: 14px; padding: 7px 10px; gap: 5px; } .lang-btn { padding: 5px 10px; font-size: 11px; } .lang-label { display: none; } }
+</style>
+</head>
+
+<body>
+<div class="bg-photo"></div>
+<div class="bg-overlay"></div>
+
+<!-- NAV -->
+<nav id="stickyNav">
+  <div class="nav-brand">
+    <img src="logo-imigrasi.png" alt="Logo" onerror="this.style.display='none'">
+    南苏拉威西移民总局
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">简介</a></li>
+    <li><a href="#history">历史</a></li>
+    <li><a href="#duties">职责</a></li>
+    <li><a href="#vismis">愿景使命</a></li>
+    <li><a href="#prima">核心价值</a></li>
+    <li><a href="#structure">组织架构</a></li>
+    <li><a href="#offices">下属机构</a></li>
+  </ul>
+  <a href="index.html" class="nav-back">← 首页</a>
+</nav>
+
+<!-- PAGE -->
+<div id="page">
+
+  <!-- HERO -->
+  <div id="hero" class="section" style="max-width:100%;opacity:1;transform:none;">
+    <div class="hero-kw">区域办公室 · 移民总局 · 南苏拉威西省</div>
+    <h1>南苏拉威西省<br>移民总局区域办公室简介</h1>
+    <p class="hero-sub">
+      为南苏拉威西省社会公众提供专业化、现代化、适应技术发展的出入境服务。
+    </p>
+    <div class="hero-cta">
+      <a href="#structure" class="btn-hero btn-hero-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        组织架构
+      </a>
+      <a href="#duties" class="btn-hero btn-hero-ghost">
+        职责与职能
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="stats-row reveal" style="max-width:860px;width:100%;">
+      <div class="stat-card"><span class="stat-num" data-target="6">0</span><span class="stat-label">技术执行单位 (UPT)</span></div>
+      <div class="stat-card"><span class="stat-num" data-target="5">0</span><span class="stat-label">移民局</span></div>
+      <div class="stat-card"><span class="stat-num" data-target="1">0</span><span class="stat-label">移民拘留所</span></div>
+      <div class="stat-card"><span class="stat-num" data-target="2024">0</span><span class="stat-label">机构改革年份</span></div>
+    </div>
+    <div class="scroll-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      向下滚动
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="about" class="section reveal">
+    <div class="two-col">
+      <div class="photo-frame">
+        <img src="kantor.jpg" alt="南苏拉威西省移民总局区域办公室" onerror="this.style.display='none'">
+        <div class="photo-placeholder">🏛️</div>
+      </div>
+      <div>
+        <div class="sec-label">机构简介</div>
+        <h2 class="sec-title">南苏拉威西省<br>移民总局区域办公室</h2>
+        <div class="ornament"><div class="orn-line"></div><div class="orn-dot"></div></div>
+        <p class="sec-body" style="margin-bottom:14px;">
+          南苏拉威西省移民总局区域办公室是隶属于印度尼西亚共和国移民与矫正部移民总局的垂直机构。
+          该机构在省级层面开展工作，承担移民总局的部分职责与职能，主要包括出入境服务、外国人管理与监督，
+          以及依据相关法律法规开展移民执法工作。
+        </p>
+        <p class="sec-body" style="margin-bottom:14px;">
+          本区域办公室在南苏拉威西地区履行对全部移民事务活动的统筹管理与监督职责，
+          包括对各技术执行单位（UPT）的指导与管理、对外国人的监督，以及为社会公众提供高效、优质的出入境服务。
+        </p>
+        <p class="sec-body">
+          作为 <strong style="color:var(--gold-light);">A 类区域机构</strong>，本办公室下辖
+          6 个技术执行单位（UPT），包括 5 个移民局和 1 个移民拘留所，服务范围覆盖南苏拉威西全省。
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HISTORY -->
+  <div id="history" class="section reveal">
+    <div class="sec-label">发展历程</div>
+    <h2 class="sec-title">历史沿革与机构转型</h2>
+    <p class="sec-body">南苏拉威西省移民总局区域办公室的设立，源于印度尼西亚自独立初期以来移民管理机构的发展，
+      随着国际人员流动的不断增加以及省级协调需求的提升而持续壮大。</p>
+
+    <div class="timeline" style="margin-top:36px;max-width:680px;">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">独立初期</div>
+        <div class="tl-title">印度尼西亚移民管理的奠基</div>
+        <div class="tl-desc">跨国人员流动的管理仍较为简单，且主要集中在少数主要入境口岸。政府开始在各地区设立移民机构单位，其中包括南苏拉威西省。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">发展阶段</div>
+        <div class="tl-title">区域办公室的设立</div>
+        <div class="tl-desc">为加强省级层面的协调与管理，逐步设立了区域办公室，作为中央政府与地方执行单位之间的桥梁，包括南苏拉威西省在内的各地区均相继建立。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">法律与人权部时期</div>
+        <div class="tl-title">隶属于法律与人权部</div>
+        <div class="tl-desc">移民事务职能隶属于印度尼西亚共和国法律与人权部，南苏拉威西省区域办公室负责协调辖区内所有技术执行单位的工作。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2024年</div>
+        <div class="tl-title">机构改革转型</div>
+        <div class="tl-desc">政府进行机构重组，设立了 <strong style="color:var(--gold-light);">移民与矫正部</strong>，以应对组织发展需求以及移民事务复杂性的持续提升。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2025年</div>
+        <div class="tl-title">逐步推进实施</div>
+        <div class="tl-desc">机构改革自 2025 年起逐步实施，进一步强化了移民总局区域办公室（包括南苏拉威西省）在出入境服务、监督管理以及移民执法方面的职能。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2026年至今</div>
+        <div class="tl-title">扩展与新设技术执行单位</div>
+        <div class="tl-desc">两个新技术执行单位相继投入运行：博内移民局（2026年1月）和班塔恩移民局。区域办公室目前下辖 6 个技术执行单位，服务覆盖南苏拉威西全省。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DUTIES -->
+  <div id="duties" class="section reveal">
+    <div class="sec-label">职责与职位</div>
+    <h2 class="sec-title">主要职责与职能</h2>
+    <p class="sec-body">移民总局区域办公室的职责是在省级层面履行移民总局的部分职能。在具体实施过程中，区域办公室主要承担以下 5 项主要职能：</p>
+
+    <div class="func-grid" style="grid-template-columns:repeat(3,1fr);">
+      <div class="func-card">
+        <div class="func-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="func-title">统筹协调运行</div>
+        <div class="func-desc">统筹协调南苏拉威西省内全部技术执行单位（UPT）的日常运行工作。</div>
+      </div>
+      <div class="func-card">
+        <div class="func-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="func-title">业务指导与监督</div>
+        <div class="func-desc">对辖区内所有技术执行单位开展出入境事务的业务指导与监督工作。</div>
+      </div>
+      <div class="func-card">
+        <div class="func-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="func-title">控制与评估</div>
+        <div class="func-desc">对各项出入境任务的实施情况进行定期、可量化、负责任的控制与评估。</div>
+      </div>
+      <div class="func-card">
+        <div class="func-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="func-title">编制工作计划和预算</div>
+        <div class="func-desc">编制符合国家政策方向和地方实际需求的移民工作计划与年度预算。</div>
+      </div>
+      <div class="func-card">
+        <div class="func-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="func-title">人力资源与行政管理</div>
+        <div class="func-desc">负责辖区内的人力资源管理、人事行政工作，以及移民机构的基础设施与装备管理。</div>
+      </div>
+      <div class="func-card" style="border-color:var(--gold-border);background:var(--gold-pale);">
+        <div class="func-icon" style="background:rgba(201,168,76,0.2);border-color:var(--gold-border);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-light)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="func-title" style="color:var(--gold-light);">法律依据</div>
+        <div class="func-desc">移民与矫正部长令 <strong style="color:var(--gold-light);">第 2 号（2024 年）</strong>——关于区域办公室组织架构与工作程序的规定。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VISION MISSION -->
+  <div id="vismis" class="section reveal">
+    <div class="sec-label">方向与目标</div>
+    <h2 class="sec-title">愿景与使命</h2>
+
+    <div class="vm-section" style="margin-top:clamp(20px,4vh,36px);">
+      <div class="sec-label" style="margin-bottom:12px;">愿景</div>
+      <div class="visi-box">
+        <p class="visi-text">
+          "构建现代化、透明化、人性化的移民与矫正服务体系，在实现印尼迈向 2045 黄金印尼目标的进程中，共同维护国家安全稳定。"
+        </p>
+      </div>
+      <div class="sec-label" style="margin-bottom:16px;">使命</div>
+      <ul class="misi-list">
+        <li class="misi-item"><div class="misi-num">1</div><span>提供以公众满意为导向的透明、公正的移民与矫正服务。</span></li>
+        <li class="misi-item"><div class="misi-num">2</div><span>构建一体化的移民监督体系，以及人性化、富有生产力和技能导向的矫正培养体系。</span></li>
+        <li class="misi-item"><div class="misi-num">3</div><span>提升移民与矫正领域人力资源的能力与专业水平。</span></li>
+        <li class="misi-item"><div class="misi-num">4</div><span>通过官僚体制与机构改革，实现良好的移民与矫正治理体系。</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PRIMA -->
+  <div id="prima" class="section reveal">
+    <div class="sec-label">核心价值观</div>
+    <h2 class="sec-title">核心价值观 PRIMA</h2>
+    <p class="sec-body">印度尼西亚共和国移民与矫正部的核心价值观为"PRIMA"，是每位移民工作人员为公众提供最优质服务的根本准则。</p>
+
+    <div class="prima-grid">
+      <div class="prima-card" data-letter="P">
+        <div class="prima-letter">P</div>
+        <div class="prima-zh">专业</div>
+        <div class="prima-word">Profesional</div>
+        <div class="prima-desc">以专业精神履行职责与职能，依据相关领域的知识、专长与能力开展工作，并以人性化方式进行服务，充分尊重和弘扬人道主义价值。</div>
+      </div>
+      <div class="prima-card" data-letter="R">
+        <div class="prima-letter">R</div>
+        <div class="prima-zh">响应</div>
+        <div class="prima-word">Responsif</div>
+        <div class="prima-desc">在提供服务时，做到快速、准确、及时响应社会公众的需求，无论是移民事务还是矫正事务领域。</div>
+      </div>
+      <div class="prima-card" data-letter="I">
+        <div class="prima-letter">I</div>
+        <div class="prima-zh">廉正</div>
+        <div class="prima-word">Integritas</div>
+        <div class="prima-desc">在履职过程中高度重视廉正原则，以诚实守信的态度和行为体现其价值，并在执法过程中坚持公平正义。</div>
+      </div>
+      <div class="prima-card" data-letter="M">
+        <div class="prima-letter">M</div>
+        <div class="prima-zh">现代</div>
+        <div class="prima-word">Modern</div>
+        <div class="prima-desc">采用现代化系统和信息技术支持各项职责与职能的实施，并以透明方式向公众提供服务。</div>
+      </div>
+      <div class="prima-card" data-letter="A">
+        <div class="prima-letter">A</div>
+        <div class="prima-zh">问责</div>
+        <div class="prima-word">Akuntabel</div>
+        <div class="prima-desc">依法依规履行职责，对工作成果承担责任，确保各项工作符合现行法律法规的要求。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STRUCTURE -->
+  <div id="structure" class="section reveal">
+    <div class="sec-label">组织管理</div>
+    <h2 class="sec-title">组织架构</h2>
+    <p class="sec-body">南苏拉威西省移民总局区域办公室为 <strong style="color:var(--gold-light);">A 类区域机构</strong>，其组织架构旨在有效支撑移民事务的协调、指导与监督工作。</p>
+
+    <div style="margin-top:clamp(20px,4vh,36px);border-radius:var(--radius);overflow:hidden;border:1px solid var(--gold-border);box-shadow:0 16px 50px rgba(0,0,0,0.5);">
+      <img src="struktur.png" alt="南苏拉威西省移民总局区域办公室组织架构图"
+        style="width:100%;display:block;"
+        onerror="this.style.display='none';document.getElementById('orgFallback').style.display='flex'">
+    </div>
+
+    <div id="orgFallback" style="display:none;margin-top:clamp(20px,4vh,36px);flex-direction:column;gap:clamp(12px,2vh,18px);">
+      <div style="background:linear-gradient(135deg,#1248b3,#0b3d91);border:1px solid rgba(255,255,255,0.2);border-radius:var(--radius);padding:clamp(14px,2.5vh,22px) clamp(20px,3vw,40px);text-align:center;max-width:340px;margin:0 auto;box-shadow:0 8px 30px rgba(11,61,145,0.5);">
+        <div style="font-size:clamp(9px,0.75vw,11px);font-weight:700;letter-spacing:0.06em;color:var(--gold-light);text-transform:uppercase;margin-bottom:4px;">区域办公室主任</div>
+        <div style="font-family:'Playfair Display',serif;font-size:clamp(14px,1.4vw,18px);font-weight:700;">Friece Sumolang</div>
+      </div>
+      <div style="background:var(--glass);border:1px solid var(--gold-border);border-radius:var(--radius);padding:clamp(12px,2vh,18px) clamp(16px,2vw,24px);text-align:center;max-width:300px;margin:0 auto;">
+        <div style="font-size:clamp(9px,0.75vw,11px);font-weight:700;letter-spacing:0.06em;color:var(--gold-light);text-transform:uppercase;margin-bottom:4px;">综合行政处处长</div>
+        <div style="font-family:'Playfair Display',serif;font-size:clamp(13px,1.2vw,16px);font-weight:700;">Perdemuan Sebayang</div>
+      </div>
+      <div style="display:flex;gap:clamp(8px,1.2vw,14px);flex-wrap:wrap;justify-content:center;">
+        <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(12px,1.8vh,18px);text-align:center;flex:1;min-width:180px;max-width:220px;">
+          <div style="font-size:clamp(9px,0.72vw,11px);font-weight:700;color:var(--text-muted);margin-bottom:4px;">情报与内部合规处</div>
+          <div style="font-family:'Playfair Display',serif;font-size:clamp(12px,1.1vw,14px);font-weight:700;">Andi Ruswan Said</div>
+        </div>
+        <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(12px,1.8vh,18px);text-align:center;flex:1;min-width:180px;max-width:220px;">
+          <div style="font-size:clamp(9px,0.72vw,11px);font-weight:700;color:var(--text-muted);margin-bottom:4px;">出入境监督与执法处</div>
+          <div style="font-family:'Playfair Display',serif;font-size:clamp(12px,1.1vw,14px);font-weight:700;">Sahroni</div>
+        </div>
+        <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(12px,1.8vh,18px);text-align:center;flex:1;min-width:180px;max-width:220px;">
+          <div style="font-size:clamp(9px,0.72vw,11px);font-weight:700;color:var(--text-muted);margin-bottom:4px;">出入境证件、居留许可及身份管理处</div>
+          <div style="font-family:'Playfair Display',serif;font-size:clamp(12px,1.1vw,14px);font-weight:700;">Imam Santoso</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:clamp(16px,3vh,28px);background:var(--glass);border:1px solid var(--border);border-radius:var(--radius);padding:clamp(14px,2.5vh,22px) clamp(16px,2.5vw,28px);backdrop-filter:blur(10px);">
+      <div class="sec-label" style="margin-bottom:12px;">架构内各单位</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;">
+        <div style="display:flex;align-items:center;gap:8px;font-size:clamp(11px,0.88vw,13px);color:var(--text-sub);"><div style="width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;"></div>区域办公室主任</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:clamp(11px,0.88vw,13px);color:var(--text-sub);"><div style="width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;"></div>综合行政处</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:clamp(11px,0.88vw,13px);color:var(--text-sub);"><div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div>出入境证件、居留许可及身份管理处</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:clamp(11px,0.88vw,13px);color:var(--text-sub);"><div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div>出入境监督与执法处</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:clamp(11px,0.88vw,13px);color:var(--text-sub);"><div style="width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div>情报与内部合规处</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:clamp(11px,0.88vw,13px);color:var(--text-sub);"><div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.3);flex-shrink:0;"></div>职能岗位及执行岗位人员</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OFFICES -->
+  <div id="offices" class="section reveal">
+    <div class="sec-label">覆盖范围</div>
+    <h2 class="sec-title">工作辖区与技术执行单位</h2>
+    <p class="sec-body">南苏拉威西省移民总局区域办公室下辖 <strong style="color:var(--gold-light);">6 个技术执行单位（UPT）</strong>，分布于南苏拉威西省各地。各单位的分类依据工作负荷、任务复杂程度以及服务辖区范围确定。</p>
+
+    <div class="wilayah-grid" style="margin-top:clamp(20px,4vh,36px);">
+      <div class="wilayah-card">
+        <div class="wilayah-icon" style="background:rgba(201,168,76,0.15);border-color:var(--gold-border);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-light)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div class="wilayah-name">望加锡第一类特别口岸移民局</div>
+          <div class="wilayah-type">第一类特别 · 口岸移民局 (TPI)</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);margin-top:4px;">局长：Abdi Widodo Subagio</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);">望加锡市、戈瓦县、马罗斯县</div>
+        </div>
+      </div>
+      <div class="wilayah-card">
+        <div class="wilayah-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div class="wilayah-name">巴雷帕雷第二类口岸移民局</div>
+          <div class="wilayah-type">第二类 · 口岸移民局 (TPI)</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);margin-top:4px;">局长：Ade Yanuar Ikbal, S.H., M.H.</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);">巴雷帕雷市及周边地区</div>
+        </div>
+      </div>
+      <div class="wilayah-card">
+        <div class="wilayah-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div class="wilayah-name">帕洛波第二类非口岸移民局</div>
+          <div class="wilayah-type">第二类 · 非口岸移民局 (Non-TPI)</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);margin-top:4px;">局长：Yogie Kashogi, A.Md.Im., S.H., M.H.</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);">南苏拉威西省北部地区</div>
+        </div>
+      </div>
+      <div class="wilayah-card" style="border-color:rgba(14,165,160,0.35);position:relative;overflow:hidden;">
+        <div style="position:absolute;top:6px;right:8px;font-size:9px;font-weight:700;letter-spacing:0.06em;color:var(--teal);background:var(--teal-pale);border:1px solid var(--teal-border);border-radius:20px;padding:2px 8px;">新设 2026</div>
+        <div class="wilayah-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div class="wilayah-name">博内第三类非口岸移民局</div>
+          <div class="wilayah-type">第三类 · 非口岸移民局 (Non-TPI)</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);margin-top:4px;">局长：Andi Rezka Putra Arupalaka</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);">博内县、辛贾伊县、瓦乔县、索彭县</div>
+        </div>
+      </div>
+      <div class="wilayah-card" style="border-color:rgba(14,165,160,0.35);position:relative;overflow:hidden;">
+        <div style="position:absolute;top:6px;right:8px;font-size:9px;font-weight:700;letter-spacing:0.06em;color:var(--teal);background:var(--teal-pale);border:1px solid var(--teal-border);border-radius:20px;padding:2px 8px;">新设</div>
+        <div class="wilayah-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div class="wilayah-name">班塔恩第三类非口岸移民局</div>
+          <div class="wilayah-type">第三类 · 非口岸移民局 (Non-TPI)</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);margin-top:4px;">局长：Nur Arifandi Azis</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);">班塔恩县、布卢昆巴县、塞拉亚尔群岛县</div>
+        </div>
+      </div>
+      <div class="wilayah-card" style="border-color:rgba(239,68,68,0.3);">
+        <div class="wilayah-icon" style="background:rgba(239,68,68,0.10);border-color:rgba(239,68,68,0.3);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div class="wilayah-name">望加锡移民拘留所</div>
+          <div class="wilayah-type" style="color:#f87171;">移民拘留所 · 望加锡</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);margin-top:4px;">所长：Rudy Prasetyo</div>
+          <div style="font-size:clamp(10px,0.78vw,12px);color:var(--text-muted);">外国人监督与临时收容专门机构</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div id="services" class="section reveal">
+    <div class="sec-label">公共服务</div>
+    <h2 class="sec-title">出入境服务类型</h2>
+    <p class="sec-body">南苏拉威西省移民总局区域办公室通过各技术执行单位，为印度尼西亚公民及外国公民提供多项出入境服务。</p>
+
+    <div class="func-grid" style="margin-top:clamp(20px,4vh,36px);">
+      <div class="func-card">
+        <div class="func-icon" style="background:rgba(201,168,76,0.15);border-color:var(--gold-border);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-light)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <div class="func-title">护照</div>
+        <div class="func-desc">由国家向本国公民签发的官方证件，用于出国旅行时的身份证明。申请人需满足行政要求并通过信息核验程序。</div>
+      </div>
+      <div class="func-card">
+        <div class="func-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div class="func-title">签证</div>
+        <div class="func-desc">向外国公民签发的许可，允许其在一定期限内进入印度尼西亚境内。包括访问签证、有限期居留签证等多种类型。</div>
+      </div>
+      <div class="func-card">
+        <div class="func-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="23" y1="11" x2="17" y2="11"/><line x1="20" y1="8" x2="20" y2="14"/></svg>
+        </div>
+        <div class="func-title">居留许可</div>
+        <div class="func-desc">外国人在入境后合法停留的法律凭证，包括访问居留许可、有限期居留许可（e-KITAS）及永久居留许可（ITAP）。</div>
+      </div>
+      <div class="func-card">
+        <div class="func-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="func-title">其他服务</div>
+        <div class="func-desc">包括机场、港口等出入境检查站的出入境检查、外国人监督管理、违规行政措施（如遣返等），以及持续推进的数字化服务建设。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TERMS -->
+  <div id="terms" class="section reveal">
+    <div class="sec-label">参考资料</div>
+    <h2 class="sec-title">出入境术语</h2>
+    <p class="sec-body">办理出入境业务时，公众需了解的重要出入境专业术语。</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(8px,1.2vw,14px);margin-top:clamp(20px,4vh,36px);">
+      <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(14px,2vh,20px) clamp(14px,1.8vw,20px);backdrop-filter:blur(10px);transition:background 0.22s;" onmouseover="this.style.background='var(--glass-hover)'" onmouseout="this.style.background='var(--glass)'">
+        <div style="font-size:clamp(11px,0.9vw,13px);font-weight:700;color:var(--gold-light);margin-bottom:5px;">TPI — 出入境检查站</div>
+        <div style="font-size:clamp(11px,0.85vw,13px);color:var(--text-sub);">设于机场、港口或边境口岸、直接办理人员出入境检查业务的移民机构。</div>
+      </div>
+      <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(14px,2vh,20px) clamp(14px,1.8vw,20px);backdrop-filter:blur(10px);transition:background 0.22s;" onmouseover="this.style.background='var(--glass-hover)'" onmouseout="this.style.background='var(--glass)'">
+        <div style="font-size:clamp(11px,0.9vw,13px);font-weight:700;color:var(--gold-light);margin-bottom:5px;">非口岸移民局（Non-TPI）</div>
+        <div style="font-size:clamp(11px,0.85vw,13px);color:var(--text-sub);">不设出入境检查站、不直接办理人员出入境检查业务的移民机构。</div>
+      </div>
+      <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(14px,2vh,20px) clamp(14px,1.8vw,20px);backdrop-filter:blur(10px);transition:background 0.22s;" onmouseover="this.style.background='var(--glass-hover)'" onmouseout="this.style.background='var(--glass)'">
+        <div style="font-size:clamp(11px,0.9vw,13px);font-weight:700;color:var(--gold-light);margin-bottom:5px;">e-KITAS — 电子有限期居留许可</div>
+        <div style="font-size:clamp(11px,0.85vw,13px);color:var(--text-sub);">向外国公民签发的电子形式有限期居留许可证明。</div>
+      </div>
+      <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(14px,2vh,20px) clamp(14px,1.8vw,20px);backdrop-filter:blur(10px);transition:background 0.22s;" onmouseover="this.style.background='var(--glass-hover)'" onmouseout="this.style.background='var(--glass)'">
+        <div style="font-size:clamp(11px,0.9vw,13px);font-weight:700;color:var(--gold-light);margin-bottom:5px;">逾期停留（Overstay）</div>
+        <div style="font-size:clamp(11px,0.85vw,13px);color:var(--text-sub);">在签证或居留许可规定期限届满后仍继续停留的行为。</div>
+      </div>
+      <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(14px,2vh,20px) clamp(14px,1.8vw,20px);backdrop-filter:blur(10px);transition:background 0.22s;" onmouseover="this.style.background='var(--glass-hover)'" onmouseout="this.style.background='var(--glass)'">
+        <div style="font-size:clamp(11px,0.9vw,13px);font-weight:700;color:var(--gold-light);margin-bottom:5px;">入境禁令 / 出境限制</div>
+        <div style="font-size:clamp(11px,0.85vw,13px);color:var(--text-sub);">因被遣返、驱逐出境或严重违反移民法规，而在一定期限内被禁止进入或离开某一国家的措施。</div>
+      </div>
+      <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(14px,2vh,20px) clamp(14px,1.8vw,20px);backdrop-filter:blur(10px);transition:background 0.22s;" onmouseover="this.style.background='var(--glass-hover)'" onmouseout="this.style.background='var(--glass)'">
+        <div style="font-size:clamp(11px,0.9vw,13px);font-weight:700;color:var(--gold-light);margin-bottom:5px;">被拘留外国人（Deteni）</div>
+        <div style="font-size:clamp(11px,0.85vw,13px);color:var(--text-sub);">经移民官员决定，被安置在移民拘留所或临时拘留室内的外国人。</div>
+      </div>
+      <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(14px,2vh,20px) clamp(14px,1.8vw,20px);backdrop-filter:blur(10px);transition:background 0.22s;" onmouseover="this.style.background='var(--glass-hover)'" onmouseout="this.style.background='var(--glass)'">
+        <div style="font-size:clamp(11px,0.9vw,13px);font-weight:700;color:var(--gold-light);margin-bottom:5px;">出入境章（Entry/Exit Stamp）</div>
+        <div style="font-size:clamp(11px,0.85vw,13px);color:var(--text-sub);">由边境管理人员在护照或旅行证件上加盖的印章，用以证明出入境的日期和地点。</div>
+      </div>
+      <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(14px,2vh,20px) clamp(14px,1.8vw,20px);backdrop-filter:blur(10px);transition:background 0.22s;" onmouseover="this.style.background='var(--glass-hover)'" onmouseout="this.style.background='var(--glass)'">
+        <div style="font-size:clamp(11px,0.9vw,13px);font-weight:700;color:var(--gold-light);margin-bottom:5px;">遣返（Deportasi）</div>
+        <div style="font-size:clamp(11px,0.85vw,13px);color:var(--text-sub);">依法将外国人强制驱离印度尼西亚领土的措施。</div>
+      </div>
+      <div style="background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);padding:clamp(14px,2vh,20px) clamp(14px,1.8vw,20px);backdrop-filter:blur(10px);transition:background 0.22s;" onmouseover="this.style.background='var(--glass-hover)'" onmouseout="this.style.background='var(--glass)'">
+        <div style="font-size:clamp(11px,0.9vw,13px);font-weight:700;color:var(--gold-light);margin-bottom:5px;">边境通行口岸（Border Crossing Point）</div>
+        <div style="font-size:clamp(11px,0.85vw,13px);color:var(--text-sub);">国家指定的人员出入境地点，如机场、港口或陆路口岸，并在此进行出入境检查。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div id="closing" class="section reveal" style="max-width:860px;">
+    <div class="closing-wrap">
+      <div class="sec-label" style="justify-content:center;">结语</div>
+      <h2 class="sec-title">用心服务，竭诚奉献</h2>
+
+      <div class="quote-box">
+        <p class="quote-text">
+          "南苏拉威西省移民总局区域办公室始终致力于提供优质、透明、专业的出入境服务。"
+        </p>
+        <p class="quote-attr">— 南苏拉威西省移民总局区域办公室</p>
+      </div>
+
+      <div class="cta-row">
+        <a href="chatbot.html" class="btn-cta btn-cta-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          出入境服务
+        </a>
+        <a href="mailto:kanwil.imigrasi.sulsel@imigrasi.go.id" class="btn-cta btn-cta-ghost">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          联系我们
+        </a>
+        <a href="#" class="btn-cta btn-cta-teal">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          公众投诉
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <span class="footer-brand">© 南苏拉威西省移民总局区域办公室</span>
+  <span id="footerYear"></span>
+</footer>
+
+<!-- LANGUAGE SWITCHER -->
+<div class="lang-switcher-bar">
+  <span class="lang-label">语言选择</span>
+
+  <a href="profil.html" class="lang-btn">
+    <span class="flag">🇮🇩</span>
+    Indonesia
+  </a>
+
+  <div class="lang-divider"></div>
+
+  <a href="profil-en.html" class="lang-btn">
+    <span class="flag">🇬🇧</span>
+    English
+  </a>
+
+  <div class="lang-divider"></div>
+
+  <a href="profil-zh.html" class="lang-btn active">
+    <span class="flag">🇨🇳</span>
+    中文
+  </a>
+</div>
+
+<script>
+/* SCROLL REVEAL */
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+revealEls.forEach(el => observer.observe(el));
+
+/* NAV ACTIVE */
+const sections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const navObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const link = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => navObserver.observe(s));
+
+/* COUNTER */
+const counters = document.querySelectorAll('.stat-num[data-target]');
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target; const target = +el.dataset.target;
+    let current = 0; const step = Math.ceil(target / 30);
+    const timer = setInterval(() => { current = Math.min(current + step, target); el.textContent = current; if (current >= target) clearInterval(timer); }, 40);
+    counterObs.unobserve(el);
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => counterObs.observe(c));
+
+/* FOOTER YEAR */
+document.getElementById('footerYear').textContent = new Date().getFullYear() + ' — 公共数字信息系统';
+</script>
+</body>
+</html>
