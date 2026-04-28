@@ -597,8 +597,8 @@ header {
     <div id="filters">
       <button class="filter-btn active" data-cat="semua" onclick="filterCat(this)">Semua</button>
       <button class="filter-btn" data-cat="umum"     onclick="filterCat(this)">Umum</button>
+      <button class="filter-btn" data-cat="bidang"      onclick="filterCat(this)">Bidang</button>
       <button class="filter-btn" data-cat="paspor"   onclick="filterCat(this)">Paspor</button>
-      <button class="filter-btn" data-cat="wna"      onclick="filterCat(this)">WNA</button>
       <button class="filter-btn" data-cat="biaya"    onclick="filterCat(this)">Biaya</button>
     </div>
 
@@ -623,14 +623,15 @@ header {
 <script>
 /* ====================== DATA ====================== */
 const videos = [
-  { id:"HWwyL9PlnXU", title:"Selamat Datang",          desc:"Pengenalan layanan imigrasi",          cat:"umum"   },
-  { id:"z2JAVhx6tE8", title:"Tata Usaha",               desc:"Prosedur administrasi kantor",          cat:"umum"   },
-  { id:"SZf24XHDIbI", title:"Dokumen Perjalanan",        desc:"Informasi paspor & visa",              cat:"paspor" },
-  { id:"crE6hjTb9A8", title:"Pengawasan Keimigrasian",   desc:"Pengawasan warga negara asing",        cat:"wna"    },
-  { id:"CJKAgLFXJvA", title:"Intelijen Keimigrasian",    desc:"Keamanan dan intelijen internal",      cat:"umum"   },
-  { id:"JjYwEbTkc_I", title:"Biaya Pembuatan Paspor",    desc:"Rincian tarif layanan paspor",         cat:"biaya"  },
-  { id:"GJBrbVdZNdM", title:"Persyaratan Dokumen",       desc:"Dokumen wajib yang perlu disiapkan",   cat:"paspor" },
-  { id:"DBdg0bxPRDw", title:"Tarif Izin Tinggal",        desc:"Biaya permohonan izin tinggal WNA",    cat:"biaya"  }
+  { id:"HWwyL9PlnXU", title:"Selamat Datang",                                                desc:"Pengenalan layanan imigrasi",                                cat:"umum"   },
+  { id:"b_9LS4yEgSo", title:"Tata nilai (PRIMA)",                                            desc:"Tata nilai kementErian Imigrasi dan Pemasyarakatan",         cat:"umum"   },
+  { id:"z2JAVhx6tE8", title:"Tata Usaha dan Umum",                                           desc:"Prosedur administrasi kantor",                               cat:"bidang" },
+  { id:"SZf24XHDIbI", title:"Dokumen Perjalanan, Izin Tinggal & Status Keimigrasian",        desc:"Informasi paspor & visa",                                    cat:"bidang" },
+  { id:"crE6hjTb9A8", title:"Pengawasan & Penindakan",                                       desc:"Pengawasan warga negara asing",                              cat:"bidang" },
+  { id:"CJKAgLFXJvA", title:"Intelijen & Kepatuhan Internal",                                desc:"Keamanan dan intelijen internal",                            cat:"bidang" },
+  { id:"JjYwEbTkc_I", title:"Biaya Pembuatan Paspor",                                        desc:"Rincian tarif layanan paspor",                               cat:"biaya"  },
+  { id:"GJBrbVdZNdM", title:"Persyaratan Dokumen Permohonan Paspor",                         desc:"Dokumen wajib yang perlu disiapkan",                         cat:"paspor" },
+  { id:"DBdg0bxPRDw", title:"Tarif Layanan Izin Tinggal Kunjungan",                          desc:"Biaya permohonan izin tinggal WNA",                          cat:"biaya"  }
 ];
 
 /* ====================== STATE ====================== */
