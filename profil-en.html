@@ -352,6 +352,35 @@ a   { text-decoration: none; color: inherit; }
   .lang-btn { padding: 5px 10px; font-size: 11px; }
   .lang-label { display: none; }
 }
+
+/* ========================= KARAKTER ========================= */
+#charLeft, #charRight {
+  position: fixed;
+  bottom: 0;
+  z-index: 50;
+  pointer-events: none;
+  user-select: none;
+}
+#charLeft  { left:  clamp(-20px, 0vw, 10px); }
+#charRight { right: clamp(-20px, 0vw, 10px); }
+
+#charLeft img, #charRight img {
+  width: clamp(140px, 16vw, 300px);
+  display: block;
+  animation: floatChar 3.2s ease-in-out infinite;
+  filter: drop-shadow(0 10px 30px rgba(0,0,0,0.35));
+}
+#charRight img { animation-delay: 0.4s; }
+
+@keyframes floatChar {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+
+@media (max-width: 768px) {
+  #charLeft, #charRight { display: none; }
+}
+
 </style>
 </head>
 
@@ -380,6 +409,18 @@ a   { text-decoration: none; color: inherit; }
 
 <!-- PAGE -->
 <div id="page">
+
+
+<!-- KARAKTER KIRI - Pria -->
+<div id="charLeft">
+  <img src="idle-men-en.png" alt="吉祥物">
+</div>
+
+<!-- KARAKTER KANAN - Wanita -->
+<div id="charRight">
+  <img src="idle-women-en.png" alt="吉祥物">
+</div>
+
 
   <!-- HERO -->
   <div id="hero" class="section" style="max-width:100%;opacity:1;transform:none;">

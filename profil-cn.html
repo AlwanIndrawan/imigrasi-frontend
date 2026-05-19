@@ -291,6 +291,36 @@ a   { text-decoration: none; color: inherit; }
 .lang-btn .flag { font-size: 14px; }
 .lang-divider { width: 1px; height: 18px; background: var(--border); margin: 0 2px; }
 @media (max-width:480px) { .lang-switcher-bar { bottom: 14px; padding: 7px 10px; gap: 5px; } .lang-btn { padding: 5px 10px; font-size: 11px; } .lang-label { display: none; } }
+
+
+/* ========================= KARAKTER CHINA ========================= */
+#charLeft, #charRight {
+  position: fixed;
+  bottom: 0;
+  z-index: 50;
+  pointer-events: none;
+  user-select: none;
+}
+#charLeft  { left:  clamp(-20px, 0vw, 10px); }
+#charRight { right: clamp(-20px, 0vw, 10px); }
+
+#charLeft img, #charRight img {
+  width: clamp(140px, 16vw, 300px);
+  display: block;
+  animation: floatChar 3.2s ease-in-out infinite;
+  filter: drop-shadow(0 10px 30px rgba(0,0,0,0.35));
+}
+#charRight img { animation-delay: 0.4s; }
+
+@keyframes floatChar {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+
+@media (max-width: 768px) {
+  #charLeft, #charRight { display: none; }
+}
+
 </style>
 </head>
 
@@ -318,6 +348,16 @@ a   { text-decoration: none; color: inherit; }
 
 <!-- PAGE -->
 <div id="page">
+
+<!-- KARAKTER KIRI - Pria pakaian China -->
+<div id="charLeft">
+  <img src="idle-men-cn.png" alt="吉祥物">
+</div>
+
+<!-- KARAKTER KANAN - Wanita pakaian China -->
+<div id="charRight">
+  <img src="idle-women-cn.png" alt="吉祥物">
+</div>
 
   <!-- HERO -->
   <div id="hero" class="section" style="max-width:100%;opacity:1;transform:none;">
