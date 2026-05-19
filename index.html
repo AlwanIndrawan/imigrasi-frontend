@@ -7,6 +7,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+/* ===== MUSIK BUTTON ===== */
+#musicBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  background: rgba(201, 168, 76, 0.2);
+  border: 1px solid rgba(201, 168, 76, 0.5);
+  color: white;
+  font-size: 22px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+#musicBtn:hover {
+  background: rgba(201, 168, 76, 0.4);
+  transform: scale(1.1);
+}
+
+
 /* ====================== VARIABLES ====================== */
 :root {
   --navy:       #060f2e;
@@ -44,7 +67,7 @@ body {
 .bg-photo {
   position: fixed;
   inset: 0;
-  background: url('bg.jpeg') center/cover no-repeat;
+  background: url('bg.jpg') center/cover no-repeat;
   z-index: 0;
 }
 .bg-overlay {
@@ -305,9 +328,9 @@ body {
 
 h1 {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(26px, 5.5vw, 64px);
+  font-size: clamp(20px, 3.4vw, 46px);
   font-weight: 900;
-  line-height: 1.15;
+  line-height: 1.2;
   letter-spacing: 0.02em;
   margin-bottom: clamp(10px,2vh,18px);
   animation: fadeUp 0.8s 0.3s ease both;
@@ -315,6 +338,8 @@ h1 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  max-width: 100%;
+  word-break: break-word;
 }
 
 /* Typing cursor */
@@ -509,6 +534,15 @@ footer {
 </head>
 
 <body>
+<!-- BACKSOUND MUSIK -->
+<audio id="bgMusic" loop>
+  <source src="backsound.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Tombol kontrol musik -->
+<button id="musicBtn" onclick="toggleMusic()" title="Musik">
+  🔊
+</button>
 
 <div class="bg-photo"></div>
 <div class="bg-overlay"></div>
@@ -642,49 +676,26 @@ function updateClock(){
 updateClock();
 setInterval(updateClock, 1000);
 
+
 /* ====================== TYPING EFFECT ====================== */
-const lines = [
-  "KANTOR WILAYAH",
-  "DIREKTORAT JENDERAL",
-  "IMIGRASI SULAWESI SELATAN"
-];
+const fullText = "KANTOR WILAYAH DIREKTORAT JENDERAL IMIGRASI SULAWESI SELATAN";
 
-const textEl = document.getElementById("typingText");
+const textEl  = document.getElementById("typingText");
+const cursorEl = document.getElementById("cursor");
 
-let lineIdx = 0;
 let charIdx = 0;
-let phase   = "typing"; // typing | pause | erasing
 
 function tick() {
-  const line = lines[lineIdx];
-  const isLast = lineIdx === lines.length - 1;
-
-  if (phase === "typing") {
-    if (charIdx <= line.length) {
-      textEl.textContent = line.substring(0, charIdx);
-      charIdx++;
-      setTimeout(tick, 45);
-    } else {
-      // Berhenti permanen di baris terakhir "IMIGRASI"
-      if (isLast) return;
-      phase = "pause";
-      setTimeout(tick, 1200);
-    }
-
-  } else if (phase === "pause") {
-    phase = "erasing";
-    setTimeout(tick, 40);
-
-  } else { // erasing
-    if (charIdx > 0) {
-      charIdx--;
-      textEl.textContent = line.substring(0, charIdx);
-      setTimeout(tick, 25);
-    } else {
-      lineIdx++;
-      phase = "typing";
-      setTimeout(tick, 300);
-    }
+  if (charIdx <= fullText.length) {
+    textEl.textContent = fullText.substring(0, charIdx);
+    charIdx++;
+    setTimeout(tick, 45);
+  } else {
+    // Selesai — cursor berhenti berkedip dan menghilang setelah 1.5 detik
+    setTimeout(() => {
+      cursorEl.style.transition = 'opacity 0.5s ease';
+      cursorEl.style.opacity = '0';
+    }, 1500);
   }
 }
 
@@ -693,6 +704,33 @@ tick();
 /* ====================== FOOTER YEAR ====================== */
 document.getElementById("footerYear").textContent =
   new Date().getFullYear() + " — Sistem Informasi Publik Digital";
+
+/* ===== BACKSOUND MUSIK ===== */
+const music = document.getElementById('bgMusic');
+const btn = document.getElementById('musicBtn');
+let playing = false;
+
+function toggleMusic() {
+  if (playing) {
+    music.pause();
+    btn.textContent = '🔇';
+    playing = false;
+  } else {
+    music.play();
+    btn.textContent = '🔊';
+    playing = true;
+  }
+}
+
+// Auto-play saat user pertama kali klik halaman
+document.addEventListener('click', function startOnClick() {
+  if (!playing) {
+    music.play();
+    btn.textContent = '🔊';
+    playing = true;
+  }
+  document.removeEventListener('click', startOnClick);
+}, { once: true });
 </script>
 
 </body>
