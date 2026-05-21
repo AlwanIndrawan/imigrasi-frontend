@@ -8,7 +8,7 @@
 
 <style>
 /* ===== MUSIK BUTTON ===== */
-/* #musicBtn {
+#musicBtn {
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -27,7 +27,7 @@
 #musicBtn:hover {
   background: rgba(201, 168, 76, 0.4);
   transform: scale(1.1);
-} */
+}
 
 
 /* ====================== VARIABLES ====================== */
@@ -535,14 +535,14 @@ footer {
 
 <body>
 <!-- BACKSOUND MUSIK -->
-<!-- <audio id="bgMusic" loop>
+<audio id="bgMusic" loop>
   <source src="backsound.mp3" type="audio/mpeg">
-</audio> -->
+</audio>
 
 <!-- Tombol kontrol musik -->
-<!-- <button id="musicBtn" onclick="toggleMusic()" title="Musik">
+<button id="musicBtn" onclick="toggleMusic()" title="Musik">
   🔊
-</button> -->
+</button>
 
 <div class="bg-photo"></div>
 <div class="bg-overlay"></div>
@@ -701,32 +701,32 @@ tick();
 document.getElementById("footerYear").textContent =
   new Date().getFullYear() + " — Sistem Informasi Publik Digital";
 
-// /* ===== BACKSOUND MUSIK ===== */
-// const music = document.getElementById('bgMusic');
-// const btn = document.getElementById('musicBtn');
-// let playing = false;
+/* ===== BACKSOUND MUSIK ===== */
+const music = document.getElementById('bgMusic');
+const btn = document.getElementById('musicBtn');
+let playing = false;
 
-// function toggleMusic() {
-//   if (playing) {
-//     music.pause();
-//     btn.textContent = '🔇';
-//     playing = false;
-//   } else {
-//     music.play();
-//     btn.textContent = '🔊';
-//     playing = true;
-//   }
-// }
+function toggleMusic() {
+  if (playing) {
+    music.pause();
+    btn.textContent = '🔇';
+    playing = false;
+  } else {
+    music.play();
+    btn.textContent = '🔊';
+    playing = true;
+  }
+}
 
-// // Auto-play saat user pertama kali klik halaman
-// document.addEventListener('click', function startOnClick() {
-//   if (!playing) {
-//     music.play();
-//     btn.textContent = '🔊';
-//     playing = true;
-//   }
-//   document.removeEventListener('click', startOnClick);
-// }, { once: true });
+// Auto-play saat user pertama kali klik halaman
+document.addEventListener('click', function startOnClick() {
+  if (!playing) {
+    music.play();
+    btn.textContent = '🔊';
+    playing = true;
+  }
+  document.removeEventListener('click', startOnClick);
+}, { once: true });
 </script>
 
 <script src="aksesibilitas.js"></script>
