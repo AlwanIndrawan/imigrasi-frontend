@@ -234,7 +234,7 @@
         width:52px; height:52px; border-radius:50%;
         background:linear-gradient(135deg,#1248b3,#0b3d91);
         border:2px solid rgba(201,168,76,0.55);
-        color:#fff; font-size:22px; cursor:pointer;
+        color:#fff; font-size:26px; cursor:pointer;
         display:flex; align-items:center; justify-content:center;
         box-shadow:0 4px 20px rgba(0,0,0,0.45), 0 0 0 0 rgba(201,168,76,0.4);
         transition:transform .2s, box-shadow .2s;
@@ -373,11 +373,7 @@
     fab.className = 'a11y-fab';
     fab.setAttribute('aria-label','Buka panel aksesibilitas');
     fab.setAttribute('title','Aksesibilitas');
-    fab.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="5" r="1.8"/>
-      <path d="M5 9h14M9 21l1.5-7 2.5 2.5 2-7"/>
-      <path d="M7.5 12.5C8.5 10 10.5 9 12 9"/>
-    </svg>`;
+    fab.innerHTML = `♿`;
     wrap.appendChild(fab);
 
     /* SR badge */
