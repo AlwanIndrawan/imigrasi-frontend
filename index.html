@@ -509,6 +509,23 @@ footer {
 .footer-brand { font-weight: 600; color: rgba(255,255,255,0.4); }
 .footer-year  { font-weight: 400; }
 
+/* ====================== PINISI BADGE ====================== */
+.pinisi-badge {
+  margin-bottom: clamp(8px, 1.5vh, 14px);
+  animation: fadeUp 0.8s 0.22s ease both;
+}
+.pinisi-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(22px, 3vw, 40px);
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  background: linear-gradient(135deg, #fff 10%, var(--gold-light) 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.85;
+}
+
 /* ====================== FADE UP KEYFRAME ====================== */
 @keyframes fadeUp {
   from { opacity:0; transform:translateY(20px); }
@@ -581,8 +598,13 @@ footer {
     <div class="ornament-line"></div>
   </div>
 
+  <!-- PINISI BRAND -->
+  <div class="pinisi-badge">
+    <div class="pinisi-title">PINISI</div>
+  </div>
+
   <!-- HEADING -->
-  <div class="heading-eyebrow">Sistem Informasi Publik Digital</div>
+  <div class="heading-eyebrow">Platfrom Informasi Imigrasi Sulsel Interaktif</div>
 
   <h1 id="typing"><span id="typingText"></span><span id="cursor"></span></h1>
 
